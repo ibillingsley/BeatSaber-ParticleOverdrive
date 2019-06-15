@@ -3,6 +3,7 @@ using System.Linq;
 using Harmony;
 using UnityEngine;
 using ParticleOverdrive.Misc;
+using BS_Utils.Utilities;
 
 namespace ParticleOverdrive.Patches
 {

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ParticleOverdrive</RootNamespace>
     <AssemblyName>ParticleOverdrive</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,19 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="0Harmony.1.2.0.1" />
     <Reference Include="Assembly-CSharp">
       <Private>False</Private>
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BeatSaberCustomUI">
       <Private>False</Private>
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Plugins\BeatSaberCustomUI.dll</HintPath>
     </Reference>
-    <Reference Include="IllusionPlugin">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="BS_Utils" />
+    <Reference Include="IPA.Loader" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,25 +52,37 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <Private>False</Private>
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <Private>False</Private>
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <Private>False</Private>
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Z:\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CameraNoiseController.cs" />
     <Compile Include="Controllers\IGlobalController.cs" />
+    <Compile Include="Misc\Config.cs" />
     <Compile Include="Misc\Logger.cs" />
-    <Compile Include="Misc\ReflectionUtil.cs" />
     <Compile Include="Patches\NoteCutParticlesEffectSpawnParticles.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\PluginUI.cs" />
     <Compile Include="Controllers\WorldParticleController.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="manifest.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
