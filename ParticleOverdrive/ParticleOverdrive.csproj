@@ -43,8 +43,12 @@
       <HintPath>$(GameDirPath)Plugins\BeatSaberCustomUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="IllusionPlugin">
-      <HintPath>$(GameDirPath)Beat Saber_Data\Managed\IllusionPlugin.dll</HintPath>
+    <Reference Include="BS_Utils">
+      <HintPath>$(GameDirPath)Plugins\BS_Utils.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="IPA.Loader">
+      <HintPath>$(GameDirPath)Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
