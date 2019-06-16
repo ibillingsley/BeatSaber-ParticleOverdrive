@@ -4,17 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Harmony;
-using IllusionPlugin;
+using IPA;
 using ParticleOverdrive.UI;
 using ParticleOverdrive.Controllers;
+using ParticleOverdrive.Misc;
 using Logger = ParticleOverdrive.Misc.Logger;
 
 namespace ParticleOverdrive
 {
-    public class Plugin : IPlugin
+    public class Plugin : IBeatSaberPlugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "0.4.2";
+        public string Version => "0.4.3";
 
         private static readonly string[] env = { "Init", "MenuCore", "GameCore", "Credits" };
 
@@ -27,10 +28,16 @@ namespace ParticleOverdrive
         public static float SlashParticleMultiplier;
         public static float ExplosionParticleMultiplier;
 
+        public void Init(IPA.Logging.Logger logger)
+        {
+            Config.Init();
+            Logger.logger = logger;
+        }
+
         public void OnApplicationStart()
         {
-            SlashParticleMultiplier = ModPrefs.GetFloat(ModPrefsKey, "slashParticleMultiplier", 1, true);
-            ExplosionParticleMultiplier = ModPrefs.GetFloat(ModPrefsKey, "explosionParticleMultiplier", 1, true);
+            SlashParticleMultiplier = Config.SlashParticleMultiplier;
+            ExplosionParticleMultiplier = Config.ExplosionParticleMultiplier;
 
             try
             {
@@ -44,19 +51,17 @@ namespace ParticleOverdrive
                 Console.WriteLine(e);
             }
 
-            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-            SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
         }
 
-        void SceneManager_sceneLoaded(Scene scene, LoadSceneMode loadMode)
+        public void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
         {
             if (scene.name == "MenuViewControllers")
                 PluginUI.CreateSettingsUI();
         }
 
-        void SceneManagerOnActiveSceneChanged(Scene _, Scene scene)
+        public void OnActiveSceneChanged(Scene _, Scene scene)
         {
-            Logger.Debug($"Scene Change! {scene.name}");
+            Logger.Log($"Scene Change! {scene.name}");
 
             if (_controller == null)
             {
@@ -66,10 +71,10 @@ namespace ParticleOverdrive
                 _particleController = _controller.AddComponent<WorldParticleController>();
                 _noiseController = _controller.AddComponent<CameraNoiseController>();
 
-                bool particleState = ModPrefs.GetBool(ModPrefsKey, "dustParticles", true, true);
+                bool particleState = Config.DustParticles;
                 _particleController.Init(particleState);
 
-                bool noiseState = ModPrefs.GetBool(ModPrefsKey, "cameraNoise", true, true);
+                bool noiseState = Config.CameraGrain;
                 _noiseController.Init(noiseState);
             }
 
@@ -80,10 +85,7 @@ namespace ParticleOverdrive
             }
         }
 
-        public void OnApplicationQuit()
-        {
-            SceneManager.activeSceneChanged -= SceneManagerOnActiveSceneChanged;
-        }
+        public void OnApplicationQuit() { }
 
         public void OnLevelWasInitialized(int level) { }
 
@@ -92,5 +94,7 @@ namespace ParticleOverdrive
         public void OnUpdate() { }
 
         public void OnFixedUpdate() { }
+
+        public void OnSceneUnloaded(Scene scene) { }
     }
 }

@@ -28,7 +28,7 @@ namespace ParticleOverdrive.Controllers
             set
             {
                 string action = value ? "Enabling" : "Disabling";
-                Logger.Debug($"{action} world particles!");
+                Logger.Log($"{action} world particles!");
 
                 _enabled = value;
             }
@@ -66,7 +66,7 @@ namespace ParticleOverdrive.Controllers
                 _dustPS = Find();
             }
 
-            Logger.Debug("Found new ParticleSystem!");
+            Logger.Log("Found new ParticleSystem!");
 
             Set();
         }

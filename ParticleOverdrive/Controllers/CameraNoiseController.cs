@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using ParticleOverdrive.Misc;
 using Logger = ParticleOverdrive.Misc.Logger;
+using BS_Utils.Utilities;
 
 namespace ParticleOverdrive.Controllers
 {
@@ -28,7 +29,7 @@ namespace ParticleOverdrive.Controllers
             set
             {
                 string action = value ? "Enabling" : "Disabling";
-                Logger.Debug($"{action} camera noise!");
+                Logger.Log($"{action} camera noise!");
 
                 _enabled = value;
                 Set();
@@ -60,7 +61,7 @@ namespace ParticleOverdrive.Controllers
 
             if (_originalNoise == null)
             {
-                Logger.Debug("Noise texture unset, caching original value...");
+                Logger.Log("Noise texture unset, caching original value...");
                 Texture2D orig = _blueNoiseDithering.GetField<Texture2D>("_noiseTexture");
 
                 _originalNoise = orig;
@@ -75,7 +76,7 @@ namespace ParticleOverdrive.Controllers
         private BlueNoiseDitheringUpdater Find()
         {
             GameObject helper = GameObject.Find("BlueNoiseHelper");
-            return helper.GetComponent<BlueNoiseDitheringUpdater>();
+            return helper?.GetComponent<BlueNoiseDitheringUpdater>();
         }
 
         public void OnSceneChange(Scene scene)
@@ -87,7 +88,7 @@ namespace ParticleOverdrive.Controllers
         {
             if (_ditheringUpdater == null)
             {
-                Logger.Debug("DitheringUpdater is null, checking for new one...");
+                Logger.Log("DitheringUpdater is null, checking for new one...");
 
                 while (_ditheringUpdater == null)
                 {
@@ -95,7 +96,7 @@ namespace ParticleOverdrive.Controllers
                     _ditheringUpdater = Find();
                 }
 
-                Logger.Debug("Found new DitheringUpdater!");
+                Logger.Log("Found new DitheringUpdater!");
             }
 
             Set();
