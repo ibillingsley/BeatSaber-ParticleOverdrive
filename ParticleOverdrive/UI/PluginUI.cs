@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using IllusionPlugin;
 using CustomUI.Settings;
+using ParticleOverdrive.Misc;
 
 namespace ParticleOverdrive.UI
 {
@@ -16,7 +16,7 @@ namespace ParticleOverdrive.UI
             noiseEnabled.SetValue += delegate (bool value)
             {
                 Plugin._noiseController.Enabled = value;
-                ModPrefs.SetBool(Plugin.ModPrefsKey, "cameraNoise", value);
+                Config.CameraGrain = value;
             };
 
             BoolViewController dustEnabled = subMenu.AddBool("Global Dust Particles");
@@ -24,7 +24,7 @@ namespace ParticleOverdrive.UI
             dustEnabled.SetValue += delegate (bool value)
             {
                 Plugin._particleController.Enabled = value;
-                ModPrefs.SetBool(Plugin.ModPrefsKey, "dustParticles", value);
+                Config.DustParticles = value;
             };
 
             float[] values = new float[]
@@ -121,7 +121,7 @@ namespace ParticleOverdrive.UI
             slashParticleCount.SetValue += delegate (float value)
             {
                 Plugin.SlashParticleMultiplier = value;
-                ModPrefs.SetFloat(Plugin.ModPrefsKey, "slashParticleMultiplier", value);
+                Config.SlashParticleMultiplier = value;
             };
 
             ListViewController exploParticleCount = subMenu.AddList("Explosion Particles", values);
@@ -130,7 +130,7 @@ namespace ParticleOverdrive.UI
             exploParticleCount.SetValue += delegate (float value)
             {
                 Plugin.ExplosionParticleMultiplier = value;
-                ModPrefs.SetFloat(Plugin.ModPrefsKey, "explosionParticleMultiplier", value);
+                Config.ExplosionParticleMultiplier = value;
             };
         }
     }
