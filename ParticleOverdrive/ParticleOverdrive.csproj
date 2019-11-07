@@ -92,7 +92,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy ".\ParticleOverdrive.dll" "$(GameDirPath)Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>
