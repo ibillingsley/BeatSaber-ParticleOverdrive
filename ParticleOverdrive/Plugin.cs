@@ -1,13 +1,13 @@
-﻿using System;
+﻿using BeatSaberMarkupLanguage.Settings;
+using Harmony;
+using IPA;
+using ParticleOverdrive.Controllers;
+using ParticleOverdrive.Misc;
+using System;
 using System.Reflection;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Harmony;
-using IPA;
-using ParticleOverdrive.UI;
-using ParticleOverdrive.Controllers;
-using ParticleOverdrive.Misc;
 using Logger = ParticleOverdrive.Misc.Logger;
 
 namespace ParticleOverdrive
@@ -17,7 +17,7 @@ namespace ParticleOverdrive
         public string Name => "Particle Overdive";
         public string Version => "0.8.0";
 
-        private static readonly string[] env = { "Init", "MenuCore", "GameCore", "Credits" };
+        private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
 
         public static GameObject _controller;
         public static WorldParticleController _particleController;
@@ -55,8 +55,7 @@ namespace ParticleOverdrive
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
         {
-            if (scene.name == "MenuViewControllers")
-                PluginUI.CreateSettingsUI();
+
         }
 
         public void OnActiveSceneChanged(Scene _, Scene scene)
@@ -82,6 +81,11 @@ namespace ParticleOverdrive
             {
                 _particleController.OnSceneChange(scene);
                 _noiseController.OnSceneChange(scene);
+            }
+
+            if (scene.name == "MenuViewControllers")
+            {
+                BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
             }
         }
 

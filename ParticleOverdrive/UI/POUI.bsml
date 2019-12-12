@@ -1,0 +1,6 @@
+﻿<settings-container>
+  <bool-setting text='Camera Noise' value='cameraNoiseEnable'></bool-setting>
+  <bool-setting text='Global Dust Particles' value='dustParticleEnable'></bool-setting>
+  <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices'></list-setting>
+  <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices'></list-setting>
+</settings-container>
