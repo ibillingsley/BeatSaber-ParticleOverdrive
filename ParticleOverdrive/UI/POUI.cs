@@ -139,5 +139,10 @@ namespace ParticleOverdrive.UI
             }
         }
 
+        [UIAction("multiplierFormatter")]
+        public string multiplierDisplay (float multiplier)
+        {
+            return $"{multiplier * 100f}%";
+        }
     }
 }

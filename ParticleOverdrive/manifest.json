@@ -5,7 +5,7 @@
   "gameVersion": "1.6.0",
   "id": "Particle Overdrive",
   "name": "Particle Overdrive",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "dependsOn": {
     "BSIPA": "^3.13.4",
     "BeatSaberMarkupLanguage": "^1.1.0",
