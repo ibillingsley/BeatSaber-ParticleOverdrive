@@ -60,8 +60,6 @@ namespace ParticleOverdrive
 
         public void OnActiveSceneChanged(Scene _, Scene scene)
         {
-            Logger.Log($"Scene Change! {scene.name}");
-
             if (_controller == null)
             {
                 _controller = new GameObject("WorldEffectController");
