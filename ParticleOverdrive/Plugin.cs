@@ -27,6 +27,9 @@ namespace ParticleOverdrive
 
         public static float SlashParticleMultiplier;
         public static float ExplosionParticleMultiplier;
+        public static float SlashParticleLifetimeMultiplier;
+        public static float ExplosionParticleLifetimeMultiplier;
+        public static bool RainbowParticles;
 
         public void Init(IPA.Logging.Logger logger)
         {
@@ -34,11 +37,18 @@ namespace ParticleOverdrive
             Logger.logger = logger;
         }
 
-        public void OnApplicationStart()
+        public void LoadConfig()
         {
             SlashParticleMultiplier = Config.SlashParticleMultiplier;
             ExplosionParticleMultiplier = Config.ExplosionParticleMultiplier;
+            SlashParticleLifetimeMultiplier = Config.SlashParticleLifetimeMultiplier;
+            ExplosionParticleLifetimeMultiplier = Config.ExplosionParticleLifetimeMultiplier;
+            RainbowParticles = Config.RainbowParticles;
+        }
 
+        public void OnApplicationStart()
+        {
+            LoadConfig();
             try
             {
                 HarmonyInstance harmony = HarmonyInstance.Create("com.jackbaron.beatsaber.particleoverdrive");
@@ -60,6 +70,7 @@ namespace ParticleOverdrive
 
         public void OnActiveSceneChanged(Scene _, Scene scene)
         {
+            LoadConfig();
             if (_controller == null)
             {
                 _controller = new GameObject("WorldEffectController");

@@ -31,6 +31,19 @@ namespace ParticleOverdrive.Misc
             }
         }
 
+        static readonly string slashParticleLifetimeMultiplier = "SlashParticleLifetimeMultiplier";
+        internal static float SlashParticleLifetimeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, slashParticleLifetimeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, slashParticleLifetimeMultiplier, value);
+            }
+        }
+
         static readonly string explosionParticleMultiplier = "ExplosionParticleMultiplier";
         internal static float ExplosionParticleMultiplier
         {
@@ -41,6 +54,32 @@ namespace ParticleOverdrive.Misc
             set
             {
                 config.SetFloat(sectionParticles, explosionParticleMultiplier, value);
+            }
+        }
+
+        static readonly string explosionParticleLifetimeMultiplier = "ExplosionParticleLifetimeMultiplier";
+        internal static float ExplosionParticleLifetimeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, explosionParticleLifetimeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, explosionParticleLifetimeMultiplier, value);
+            }
+        }
+
+        static readonly string rainbowParticles = "RainbowParticles";
+        internal static bool RainbowParticles
+        {
+            get
+            {
+                return config.GetBool(sectionParticles, rainbowParticles, false, true);
+            }
+            set
+            {
+                config.SetBool(sectionParticles, rainbowParticles, value);
             }
         }
 
