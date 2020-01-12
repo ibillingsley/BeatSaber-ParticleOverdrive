@@ -65,7 +65,7 @@ namespace ParticleOverdrive
             try
             {
                 GetBlueNoiseDithering = Utilities.CreateRefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering>("_blueNoiseDithering");
-                GetNoiseTexture = Utilities.CreateRefGetter<BlueNoiseDithering, Texture2D>("_nnoiseTexture");
+                GetNoiseTexture = Utilities.CreateRefGetter<BlueNoiseDithering, Texture2D>("_noiseTexture");
                 CameraNoiseWorldParticlesEnabled = true;
             }
             catch (Exception ex)
