@@ -24,6 +24,16 @@ namespace ParticleOverdrive
         public static WorldParticleController _particleController;
         public static CameraNoiseController _noiseController;
 
+        #region Private Field Getters
+
+        internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetExplosionPS;
+        internal static RefGetter<NoteCutParticlesEffect, ParticleSystem[]> GetSparklesPS;
+        internal static RefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering> GetBlueNoiseDithering;
+        internal static RefGetter<BlueNoiseDithering, Texture2D> GetNoiseTexture;
+        #endregion
+
+        internal static bool Enabled;
+
         public static readonly string ModPrefsKey = "ParticleOverdrive";
 
         public static float SlashParticleMultiplier;
@@ -50,6 +60,21 @@ namespace ParticleOverdrive
 
         public void OnApplicationStart()
         {
+            try
+            {
+                GetExplosionPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionPS");
+                GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem[]>("_sparklesPS");
+                GetBlueNoiseDithering = Utilities.CreateRefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering>("_blueNoiseDithering");
+                GetNoiseTexture = Utilities.CreateRefGetter<BlueNoiseDithering, Texture2D>("_noiseTexture");
+            }
+            catch(Exception ex)
+            {
+                log.Error($"Error creating private field accessors, ParticleOverdrive cannot load: {ex.Message}");
+                log.Debug(ex);
+                Enabled = false;
+                return;
+            }
+
             LoadConfig();
             try
             {
@@ -76,6 +101,8 @@ namespace ParticleOverdrive
 
         public void OnActiveSceneChanged(Scene _, Scene scene)
         {
+            if (!Enabled)
+                return;
             LoadConfig();
             if (_controller == null)
             {

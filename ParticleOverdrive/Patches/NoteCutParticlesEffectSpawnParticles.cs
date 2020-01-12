@@ -4,6 +4,8 @@ using Harmony;
 using UnityEngine;
 using ParticleOverdrive.Misc;
 using BS_Utils.Utilities;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace ParticleOverdrive.Patches
 {
@@ -11,9 +13,11 @@ namespace ParticleOverdrive.Patches
     [HarmonyPatch("SpawnParticles")]
     class NoteCutParticlesEffectSpawnParticles
     {
-        internal static void Prefix(ref NoteCutParticlesEffect __instance, ref Color32 color, ref int sparkleParticlesCount, ref int explosionParticlesCount, ref float lifetimeMultiplier,
-            ref ParticleSystem[] ____sparklesPS, ref ParticleSystem ____explosionPS)
+        internal static void Prefix(ref NoteCutParticlesEffect __instance, ref Color32 color, ref int sparkleParticlesCount, ref int explosionParticlesCount, ref float lifetimeMultiplier)
         {
+            var ____explosionPS = Plugin.GetExplosionPS(__instance);
+            var ____sparklesPS = Plugin.GetSparklesPS(__instance);
+
             sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * Plugin.SlashParticleMultiplier);
             explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * Plugin.ExplosionParticleMultiplier);
             lifetimeMultiplier *= Plugin.SlashParticleLifetimeMultiplier;
@@ -25,5 +29,6 @@ namespace ParticleOverdrive.Patches
             explosionMain.maxParticles = int.MaxValue;
             explosionMain.startLifetimeMultiplier = Plugin.ExplosionParticleLifetimeMultiplier;
         }
+
     }
 }
