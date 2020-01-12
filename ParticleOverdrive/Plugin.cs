@@ -32,7 +32,8 @@ namespace ParticleOverdrive
         internal static RefGetter<BlueNoiseDithering, Texture2D> GetNoiseTexture;
         #endregion
 
-        internal static bool Enabled;
+        internal static bool CameraNoiseWorldParticlesEnabled;
+        internal static bool SlashExplosionParticlesEnabled;
 
         public static readonly string ModPrefsKey = "ParticleOverdrive";
 
@@ -60,38 +61,48 @@ namespace ParticleOverdrive
 
         public void OnApplicationStart()
         {
+            LoadConfig();
+            try
+            {
+                GetBlueNoiseDithering = Utilities.CreateRefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering>("_blueNoiseDithering");
+                GetNoiseTexture = Utilities.CreateRefGetter<BlueNoiseDithering, Texture2D>("_nnoiseTexture");
+                CameraNoiseWorldParticlesEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Error creating private field accessors for camera noise and/or world particles, , these features will be disabled: {ex.Message}");
+                log.Debug(ex);
+                CameraNoiseWorldParticlesEnabled = false;
+            }
             try
             {
                 GetExplosionPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionPS");
                 GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem[]>("_sparklesPS");
-                GetBlueNoiseDithering = Utilities.CreateRefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering>("_blueNoiseDithering");
-                GetNoiseTexture = Utilities.CreateRefGetter<BlueNoiseDithering, Texture2D>("_noiseTexture");
+                SlashExplosionParticlesEnabled = true;
+                try
+                {
+                    HarmonyInstance harmony = HarmonyInstance.Create("com.jackbaron.beatsaber.particleoverdrive");
+                    harmony.PatchAll(Assembly.GetExecutingAssembly());
+                }
+                catch (Exception e)
+                {
+                    SlashExplosionParticlesEnabled = false;
+                    if (e.InnerException is ArgumentException argEx)
+                    {
+                        log.Error($"Error applying Harmony patches. {argEx.Message}.");//: {argEx.ParamName}");
+                    }
+                    else
+                        log.Error($"Error applying Harmony patches: {e.Message}");
+                    log.Debug(e);
+                }
+
             }
             catch(Exception ex)
             {
-                log.Error($"Error creating private field accessors, ParticleOverdrive cannot load: {ex.Message}");
+                log.Error($"Error creating private field accessors for Slash/Explosion particles, these features will be disabled: {ex.Message}");
                 log.Debug(ex);
-                Enabled = false;
-                return;
+                SlashExplosionParticlesEnabled = false;
             }
-
-            LoadConfig();
-            try
-            {
-                HarmonyInstance harmony = HarmonyInstance.Create("com.jackbaron.beatsaber.particleoverdrive");
-                harmony.PatchAll(Assembly.GetExecutingAssembly());
-            }
-            catch (Exception e)
-            {
-                if (e.InnerException is ArgumentException argEx)
-                {
-                    log.Error($"Error applying Harmony patches. {argEx.Message}.");//: {argEx.ParamName}");
-                }
-                else
-                    log.Error($"Error applying Harmony patches: {e.Message}");
-                log.Debug(e);
-            }
-
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
@@ -101,9 +112,13 @@ namespace ParticleOverdrive
 
         public void OnActiveSceneChanged(Scene _, Scene scene)
         {
-            if (!Enabled)
-                return;
+            if (scene.name == "MenuViewControllers")
+            {
+                BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
+            }
             LoadConfig();
+            if (!CameraNoiseWorldParticlesEnabled)
+                return;
             if (_controller == null)
             {
                 _controller = new GameObject("WorldEffectController");
@@ -123,11 +138,6 @@ namespace ParticleOverdrive
             {
                 _particleController.OnSceneChange(scene);
                 _noiseController.OnSceneChange(scene);
-            }
-
-            if (scene.name == "MenuViewControllers")
-            {
-                BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
             }
         }
 

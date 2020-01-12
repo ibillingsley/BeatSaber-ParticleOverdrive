@@ -140,7 +140,9 @@ namespace ParticleOverdrive.UI
             get => Config.CameraGrain;
             set
             {
-                Plugin._noiseController.Enabled = value;
+
+                if (Plugin.CameraNoiseWorldParticlesEnabled)
+                    Plugin._noiseController.Enabled = value;
                 Config.CameraGrain = value;
             }
         }
@@ -152,7 +154,8 @@ namespace ParticleOverdrive.UI
             get => Config.DustParticles;
             set
             {
-                Plugin._particleController.Enabled = value;
+                if (Plugin.CameraNoiseWorldParticlesEnabled)
+                    Plugin._particleController.Enabled = value;
                 Config.DustParticles = value;
             }
         }
@@ -219,7 +222,7 @@ namespace ParticleOverdrive.UI
         }
 
         [UIAction("multiplierFormatter")]
-        public string multiplierDisplay (float multiplier)
+        public string multiplierDisplay(float multiplier)
         {
             return $"{multiplier * 100f}%";
         }
