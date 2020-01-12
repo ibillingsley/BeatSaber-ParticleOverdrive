@@ -15,17 +15,20 @@ namespace ParticleOverdrive.Patches
     {
         internal static void Prefix(ref NoteCutParticlesEffect __instance, ref Color32 color, ref int sparkleParticlesCount, ref int explosionParticlesCount, ref float lifetimeMultiplier)
         {
-            var ____explosionPS = Plugin.GetExplosionPS(__instance);
-            var ____sparklesPS = Plugin.GetSparklesPS(__instance);
+            ParticleSystem explosionPS = Plugin.GetExplosionPS(__instance);
+            ParticleSystem[] sparklesPSAry = Plugin.GetSparklesPS(__instance);
 
             sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * Plugin.SlashParticleMultiplier);
             explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * Plugin.ExplosionParticleMultiplier);
             lifetimeMultiplier *= Plugin.SlashParticleLifetimeMultiplier;
             if (Plugin.RainbowParticles)
                 color = UnityEngine.Random.ColorHSV();
-            ParticleSystem.MainModule slashMain = ____sparklesPS[0].main;
-            slashMain.maxParticles = int.MaxValue;
-            ParticleSystem.MainModule explosionMain = ____explosionPS.main;
+            for (int i = 0; i < sparklesPSAry.Length; i++)
+            {
+                ParticleSystem.MainModule slashMain = sparklesPSAry[i].main;
+                slashMain.maxParticles = int.MaxValue;
+            }
+            ParticleSystem.MainModule explosionMain = explosionPS.main;
             explosionMain.maxParticles = int.MaxValue;
             explosionMain.startLifetimeMultiplier = Plugin.ExplosionParticleLifetimeMultiplier;
         }
