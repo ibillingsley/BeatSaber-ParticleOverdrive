@@ -16,6 +16,7 @@ namespace ParticleOverdrive
     {
         public string Name => "Particle Overdive";
         public string Version => "1.0.0";
+        IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
 
@@ -34,6 +35,7 @@ namespace ParticleOverdrive
         public void Init(IPA.Logging.Logger logger)
         {
             Config.Init();
+            log = logger;
             Logger.logger = logger;
         }
 
@@ -56,9 +58,13 @@ namespace ParticleOverdrive
             }
             catch (Exception e)
             {
-                Logger.Log("This plugin requires Harmony. Make sure you " +
-                    "installed the plugin properly, as the Harmony DLL should have been installed with it.");
-                Console.WriteLine(e);
+                if (e.InnerException is ArgumentException argEx)
+                {
+                    log.Error($"Error applying Harmony patches. {argEx.Message}.");//: {argEx.ParamName}");
+                }
+                else
+                    log.Error($"Error applying Harmony patches: {e.Message}");
+                log.Debug(e);
             }
 
         }
