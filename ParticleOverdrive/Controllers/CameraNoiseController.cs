@@ -57,20 +57,20 @@ namespace ParticleOverdrive.Controllers
 
         private void Set()
         {
-            BlueNoiseDithering _blueNoiseDithering = DitheringUpdater.GetField<BlueNoiseDithering>("_blueNoiseDithering");
+            BlueNoiseDithering _blueNoiseDithering = Plugin.GetBlueNoiseDithering(DitheringUpdater);
 
             if (_originalNoise == null)
             {
                 Logger.Log("Noise texture unset, caching original value...");
-                Texture2D orig = _blueNoiseDithering.GetField<Texture2D>("_noiseTexture");
+                Texture2D orig = Plugin.GetNoiseTexture(_blueNoiseDithering);
 
                 _originalNoise = orig;
             }
 
             if (_enabled)
-                _blueNoiseDithering.SetField("_noiseTexture", _originalNoise);
+                Plugin.GetNoiseTexture(_blueNoiseDithering) = _originalNoise;
             else
-                _blueNoiseDithering.SetField("_noiseTexture", _newNoise);
+                Plugin.GetNoiseTexture(_blueNoiseDithering) = _newNoise;
         }
 
         private BlueNoiseDitheringUpdater Find()

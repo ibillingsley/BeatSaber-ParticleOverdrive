@@ -4,6 +4,8 @@ using Harmony;
 using UnityEngine;
 using ParticleOverdrive.Misc;
 using BS_Utils.Utilities;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace ParticleOverdrive.Patches
 {
@@ -11,24 +13,25 @@ namespace ParticleOverdrive.Patches
     [HarmonyPatch("SpawnParticles")]
     class NoteCutParticlesEffectSpawnParticles
     {
-        static void Prefix(ref NoteCutParticlesEffect __instance, ref int sparkleParticlesCount, ref int explosionParticlesCount)
+        internal static void Prefix(ref NoteCutParticlesEffect __instance, ref Color32 color, ref int sparkleParticlesCount, ref int explosionParticlesCount, ref float lifetimeMultiplier)
         {
-            float slashMulti = Plugin.SlashParticleMultiplier;
-            float exploMulti = Plugin.ExplosionParticleMultiplier;
+            ParticleSystem explosionPS = Plugin.GetExplosionPS(__instance);
+            ParticleSystem[] sparklesPSAry = Plugin.GetSparklesPS(__instance);
 
-            ParticleSystem[] slashPS = (ParticleSystem[])__instance.GetField("_sparklesPS");
-            foreach (ParticleSystem ps in slashPS)
+            sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * Plugin.SlashParticleMultiplier);
+            explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * Plugin.ExplosionParticleMultiplier);
+            lifetimeMultiplier *= Plugin.SlashParticleLifetimeMultiplier;
+            if (Plugin.RainbowParticles)
+                color = UnityEngine.Random.ColorHSV();
+            for (int i = 0; i < sparklesPSAry.Length; i++)
             {
-                ParticleSystem.MainModule main = ps.main;
-                main.maxParticles = 150 * Mathf.FloorToInt(slashMulti * 2f);
+                ParticleSystem.MainModule slashMain = sparklesPSAry[i].main;
+                slashMain.maxParticles = int.MaxValue;
             }
-
-            sparkleParticlesCount = 150 * Mathf.FloorToInt(slashMulti);
-
-            ParticleSystem.MainModule exploPS = ((ParticleSystem)__instance.GetField("_explosionPS")).main;
-
-            explosionParticlesCount = 150 * Mathf.FloorToInt(exploMulti);
-            exploPS.maxParticles = 150 * Mathf.FloorToInt(exploMulti * 2f);
+            ParticleSystem.MainModule explosionMain = explosionPS.main;
+            explosionMain.maxParticles = int.MaxValue;
+            explosionMain.startLifetimeMultiplier = Plugin.ExplosionParticleLifetimeMultiplier;
         }
+
     }
 }

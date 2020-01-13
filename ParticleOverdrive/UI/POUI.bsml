@@ -2,5 +2,8 @@
   <bool-setting text='Camera Noise' value='cameraNoiseEnable'></bool-setting>
   <bool-setting text='Global Dust Particles' value='dustParticleEnable'></bool-setting>
   <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices' formatter='multiplierFormatter'></list-setting>
+  <list-setting text='Slash Particle Lifetime' value='slashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
   <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter'></list-setting>
+  <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+  <bool-setting text='RainbowParticles' value='rainbowParticlesEnable'></bool-setting>
 </settings-container>
