@@ -121,7 +121,15 @@ namespace ParticleOverdrive.UI
                 4.5f,
                 4.75f,
                 5f,
-                Infinity,
+                7.5f,
+                10f,
+                15f,
+                20f,
+                30f,
+                40f,
+                50f,
+                75f,
+                100f
             };
 
         [UIValue("slashParticleChoices")]
