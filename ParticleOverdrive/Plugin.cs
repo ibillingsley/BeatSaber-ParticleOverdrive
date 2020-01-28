@@ -15,7 +15,7 @@ namespace ParticleOverdrive
     public class Plugin : IBeatSaberPlugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.0.0";
+        public string Version => "1.1.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
