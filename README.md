@@ -3,12 +3,14 @@
 
 * Plugin made by lolPants
 * BSIPA conversion by Steven 🎀
+* Additional contributions by Zingabopp
 
 ## Features
 * Disable Camera Noise
 * Disable global particle haze
-* Configure slash particle amount
-* Configure explosion particle amount
+* Configure slash particle amount and lifetime
+* Configure explosion particle amount and lifetime
+* Add rainbow colors to particles
 
 ## Usage
 You can either configure the plugin by editing `UserData\ParticleOverdrive.ini`, but the preferred method of configuration is using the in-game settings menu.  
