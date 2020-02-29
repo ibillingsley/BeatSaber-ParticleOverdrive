@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 using ParticleOverdrive.Misc;
 using BS_Utils.Utilities;

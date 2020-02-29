@@ -1,5 +1,5 @@
 ﻿using BeatSaberMarkupLanguage.Settings;
-using Harmony;
+using HarmonyLib;
 using IPA;
 using ParticleOverdrive.Controllers;
 using ParticleOverdrive.Misc;
@@ -12,10 +12,11 @@ using Logger = ParticleOverdrive.Misc.Logger;
 
 namespace ParticleOverdrive
 {
-    public class Plugin : IBeatSaberPlugin
+    [Plugin(RuntimeOptions.SingleStartInit)]
+    public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.1.0";
+        public string Version => "1.2.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
@@ -43,6 +44,7 @@ namespace ParticleOverdrive
         public static float ExplosionParticleLifetimeMultiplier;
         public static bool RainbowParticles;
 
+        [Init]
         public void Init(IPA.Logging.Logger logger)
         {
             Config.Init();
@@ -59,7 +61,8 @@ namespace ParticleOverdrive
             RainbowParticles = Config.RainbowParticles;
         }
 
-        public void OnApplicationStart()
+        [OnStart]
+        public void OnStart()
         {
             LoadConfig();
             try
@@ -81,7 +84,7 @@ namespace ParticleOverdrive
                 SlashExplosionParticlesEnabled = true;
                 try
                 {
-                    HarmonyInstance harmony = HarmonyInstance.Create("com.jackbaron.beatsaber.particleoverdrive");
+                    Harmony harmony = new Harmony("com.jackbaron.beatsaber.particleoverdrive");
                     harmony.PatchAll(Assembly.GetExecutingAssembly());
                 }
                 catch (Exception e)
@@ -103,16 +106,19 @@ namespace ParticleOverdrive
                 log.Debug(ex);
                 SlashExplosionParticlesEnabled = false;
             }
+
+            AddEvents();
         }
 
-        public void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+        [OnExit]
+        public void OnExit()
         {
-
+            RemoveEvents();
         }
 
-        public void OnActiveSceneChanged(Scene _, Scene scene)
+        public void OnActiveSceneChanged(Scene prevScene, Scene scene)
         {
-            if (scene.name == "MenuViewControllers")
+            if (scene.name == "MenuViewControllers" && prevScene.name == "EmptyTransition")
             {
                 BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
             }
@@ -141,16 +147,16 @@ namespace ParticleOverdrive
             }
         }
 
-        public void OnApplicationQuit() { }
+        private void AddEvents()
+        {
+            RemoveEvents();
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        }
 
-        public void OnLevelWasInitialized(int level) { }
+        private void RemoveEvents()
+        {
+            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        }
 
-        public void OnLevelWasLoaded(int level) { }
-
-        public void OnUpdate() { }
-
-        public void OnFixedUpdate() { }
-
-        public void OnSceneUnloaded(Scene scene) { }
     }
 }
