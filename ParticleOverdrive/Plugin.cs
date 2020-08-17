@@ -16,7 +16,7 @@ namespace ParticleOverdrive
     public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.2.0";
+        public string Version => "1.3.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
