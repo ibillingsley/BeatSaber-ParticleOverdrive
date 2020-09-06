@@ -22,7 +22,7 @@ namespace ParticleOverdrive.Patches
             explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * Plugin.ExplosionParticleMultiplier);
             lifetimeMultiplier *= Plugin.SlashParticleLifetimeMultiplier;
             if (Plugin.RainbowParticles)
-                color = UnityEngine.Random.ColorHSV();
+                color = UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1, 1, 1);
             for (int i = 0; i < sparklesPSAry.Length; i++)
             {
                 ParticleSystem.MainModule slashMain = sparklesPSAry[i].main;
