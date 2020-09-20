@@ -135,8 +135,14 @@ namespace ParticleOverdrive.UI
         [UIValue("slashParticleChoices")]
         private List<object> _slashParticleMultiplierChoices = particleMultiplierChoicesList;
 
+        [UIValue("slashParticleSpeedChoices")]
+        private List<object> _slashParticleSpeedChoices = particleMultiplierChoicesList;
+
         [UIValue("explosionParticleChoices")]
         private List<object> _explosionParticleMultiplierChoices = particleMultiplierChoicesList;
+
+        [UIValue("clashParticleChoices")]
+        private List<object> _clashParticleMultiplierChoices = particleMultiplierChoicesList;
 
         [UIValue("lifetimeChoices")]
         private List<object> _lifetimeChoices = LifetimeValues;
@@ -171,7 +177,6 @@ namespace ParticleOverdrive.UI
         [UIValue("slashParticleChoice")]
         public float _slashParticleMultiplier
         {
-            //get => Config.SlashParticleMultiplier;
             get => Config.SlashParticleMultiplier;
             set
             {
@@ -183,7 +188,6 @@ namespace ParticleOverdrive.UI
         [UIValue("slashParticleLifetimeChoice")]
         public float _slashParticleLifetimeMultiplier
         {
-            //get => Config.SlashParticleMultiplier;
             get => Config.SlashParticleLifetimeMultiplier;
             set
             {
@@ -191,6 +195,17 @@ namespace ParticleOverdrive.UI
                 Config.SlashParticleLifetimeMultiplier = value;
             }
         }
+
+        //[UIValue("slashParticleSpeedChoice")]
+        //public float _slashParticleSpeedMultiplier
+        //{
+        //    get => Config.SlashParticleSpeedMultiplier;
+        //    set
+        //    {
+        //        Plugin.SlashParticleSpeedMultiplier = value;
+        //        Config.SlashParticleSpeedMultiplier = value;
+        //    }
+        //}
 
         [UIValue("explosionParticleChoice")]
         public float _explosionParticleMultiplier
@@ -208,7 +223,7 @@ namespace ParticleOverdrive.UI
         [UIValue("explosionParticleLifetimeChoice")]
         public float _explosionParticleLifetimeMultiplier
         {
-            //get => Config.SlashParticleMultiplier;
+            //get => Config.ExplosionParticleLifetimeMultiplier;
             get => Config.ExplosionParticleLifetimeMultiplier;
             set
             {
@@ -226,6 +241,31 @@ namespace ParticleOverdrive.UI
             {
                 Plugin.RainbowParticles = value;
                 Config.RainbowParticles = value;
+            }
+        }
+
+        [UIValue("clashParticleChoice")]
+        public float _clashParticleMultiplier
+        {
+            //get => Config.ClashParticleMultiplier;
+            get => Config.ClashParticleMultiplier;
+            set
+            {
+                Plugin.ClashParticleMultiplier = value;
+                Config.ClashParticleMultiplier = value;
+            }
+        }
+
+
+        [UIValue("clashParticleLifetimeChoice")]
+        public float _clashParticleLifetimeMultiplier
+        {
+            //get => Config.ClashParticleMultiplier;
+            get => Config.ClashParticleLifetimeMultiplier;
+            set
+            {
+                Plugin.ClashParticleLifetimeMultiplier = value;
+                Config.ClashParticleLifetimeMultiplier = value;
             }
         }
 

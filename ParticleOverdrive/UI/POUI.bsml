@@ -1,9 +1,40 @@
-﻿<settings-container>
-  <bool-setting text='Camera Noise' value='cameraNoiseEnable'></bool-setting>
-  <bool-setting text='Global Dust Particles' value='dustParticleEnable'></bool-setting>
-  <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices' formatter='multiplierFormatter'></list-setting>
-  <list-setting text='Slash Particle Lifetime' value='slashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
-  <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter'></list-setting>
-  <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
-  <bool-setting text='Rainbow Particles' value='rainbowParticlesEnable'></bool-setting>
+﻿<settings-container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal pref-width='90'>
+    <text text='Particle Overdrive Settings' font-size='5' align='Center'/>
+  </horizontal>
+  
+  <!--World Particles-->
+  <settings-submenu text='&#62; World Particles...' hover-hint='Enable/Disable world particles and camera noise.'>
+    <settings-container>
+      <bool-setting text='Camera Noise' value='cameraNoiseEnable'></bool-setting>
+      <bool-setting text='Global Dust Particles' value='dustParticleEnable'></bool-setting>
+
+      <clickable-text text='&#60; Back' align='Left' click-event='back' />
+    </settings-container>
+  </settings-submenu>
+  
+  <!--Note Cut Particles-->
+  <settings-submenu text='&#62; Note Cut Particles...' hover-hint='Modify or disable note cut particles.'>
+    <settings-container>
+      <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Slash Particle Lifetime' value='slashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <!--<list-setting text='Slash Particle Speed' value='slashParticleSpeedChoice' choices='slashParticleSpeedChoices' formatter='multiplierFormatter'></list-setting>-->
+      <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <bool-setting text='Rainbow Particles' value='rainbowParticlesEnable'></bool-setting>
+
+      <clickable-text text='&#60; Back' align='Left' click-event='back' />
+    </settings-container>
+  </settings-submenu>
+  
+  <!--Saber Clash Particles-->
+  <settings-submenu text='&#62; Saber Clash Particles...' hover-hint='Modify or disable saber clash particles.'>
+    <settings-container>
+      <list-setting text='Clash Particles' value='clashParticleChoice' choices='clashParticleChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Clash Particles Lifetime' value='clashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+
+      <clickable-text text='&#60; Back' align='Left' click-event='back' />
+    </settings-container>
+  </settings-submenu>
+  
 </settings-container>

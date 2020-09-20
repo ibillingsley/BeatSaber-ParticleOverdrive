@@ -16,7 +16,7 @@ namespace ParticleOverdrive
     public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.4.0";
+        public string Version => "1.5.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
@@ -31,6 +31,8 @@ namespace ParticleOverdrive
         internal static RefGetter<NoteCutParticlesEffect, ParticleSystem[]> GetSparklesPS;
         internal static RefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering> GetBlueNoiseDithering;
         internal static RefGetter<BlueNoiseDithering, Texture2D> GetNoiseTexture;
+        internal static RefGetter<SaberClashEffect, ParticleSystem> GetSaberClashGlowPS;
+        internal static RefGetter<SaberClashEffect, ParticleSystem> GetSaberClashSparklePS;
         #endregion
 
         internal static bool CameraNoiseWorldParticlesEnabled;
@@ -40,8 +42,11 @@ namespace ParticleOverdrive
 
         public static float SlashParticleMultiplier;
         public static float ExplosionParticleMultiplier;
+        public static float ClashParticleMultiplier;
         public static float SlashParticleLifetimeMultiplier;
         public static float ExplosionParticleLifetimeMultiplier;
+        public static float ClashParticleLifetimeMultiplier;
+        public static float SlashParticleSpeedMultiplier;
         public static bool RainbowParticles;
 
         [Init]
@@ -56,8 +61,11 @@ namespace ParticleOverdrive
         {
             SlashParticleMultiplier = Config.SlashParticleMultiplier;
             ExplosionParticleMultiplier = Config.ExplosionParticleMultiplier;
+            ClashParticleMultiplier = Config.ClashParticleMultiplier;
             SlashParticleLifetimeMultiplier = Config.SlashParticleLifetimeMultiplier;
             ExplosionParticleLifetimeMultiplier = Config.ExplosionParticleLifetimeMultiplier;
+            ClashParticleLifetimeMultiplier = Config.ClashParticleLifetimeMultiplier;
+            //SlashParticleSpeedMultiplier = Config.SlashParticleSpeedMultiplier;
             RainbowParticles = Config.RainbowParticles;
         }
 
@@ -81,6 +89,8 @@ namespace ParticleOverdrive
             {
                 GetExplosionPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionPS");
                 GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem[]>("_sparklesPS");
+                GetSaberClashGlowPS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_glowParticleSystem");
+                GetSaberClashSparklePS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_sparkleParticleSystem");
                 SlashExplosionParticlesEnabled = true;
                 try
                 {
