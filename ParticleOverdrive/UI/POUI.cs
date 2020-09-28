@@ -269,6 +269,17 @@ namespace ParticleOverdrive.UI
             }
         }
 
+        [UIValue("clashGlowEnable")]
+        public bool _clashGlowEnable
+        {
+            get => Config.ClashGlow;
+            set
+            {
+                Plugin.ClashGlow = value;
+                Config.ClashGlow = value;
+            }
+        }
+
         [UIAction("multiplierFormatter")]
         public string multiplierDisplay(float multiplier)
         {

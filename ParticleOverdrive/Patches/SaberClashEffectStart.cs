@@ -24,7 +24,10 @@ namespace ParticleOverdrive.Patches
             ParticleSystem.MainModule glowMain = glowPS.main;
             ParticleSystem.MainModule sparkleMain = sparklePS.main;
 
-            glowMain.maxParticles = int.MaxValue;
+            if (!Plugin.ClashGlow)
+            {
+                glowMain.startLifetimeMultiplier = 0;
+            }
 
             sparkleEM.rateOverDistanceMultiplier = sparkleEM.rateOverDistanceMultiplier * Plugin.ClashParticleMultiplier;
             sparkleEM.rateOverTimeMultiplier = sparkleEM.rateOverTimeMultiplier * Plugin.ClashParticleMultiplier;

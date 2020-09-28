@@ -122,6 +122,19 @@ namespace ParticleOverdrive.Misc
             }
         }
 
+        static readonly string clashGlow = "ClashGlow";
+        internal static bool ClashGlow
+        {
+            get
+            {
+                return config.GetBool(sectionParticles, clashGlow, true, true);
+            }
+            set
+            {
+                config.SetBool(sectionParticles, clashGlow, value);
+            }
+        }
+
         static readonly string dustParticles = "DustParticles";
         internal static bool DustParticles
         {

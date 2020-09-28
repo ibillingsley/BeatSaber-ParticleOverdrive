@@ -46,7 +46,8 @@ namespace ParticleOverdrive
         public static float SlashParticleLifetimeMultiplier;
         public static float ExplosionParticleLifetimeMultiplier;
         public static float ClashParticleLifetimeMultiplier;
-        public static float SlashParticleSpeedMultiplier;
+        //public static float SlashParticleSpeedMultiplier;
+        public static bool ClashGlow;
         public static bool RainbowParticles;
 
         [Init]
@@ -66,6 +67,7 @@ namespace ParticleOverdrive
             ExplosionParticleLifetimeMultiplier = Config.ExplosionParticleLifetimeMultiplier;
             ClashParticleLifetimeMultiplier = Config.ClashParticleLifetimeMultiplier;
             //SlashParticleSpeedMultiplier = Config.SlashParticleSpeedMultiplier;
+            ClashGlow = Config.ClashGlow;
             RainbowParticles = Config.RainbowParticles;
         }
 

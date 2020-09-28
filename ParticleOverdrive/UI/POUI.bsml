@@ -4,7 +4,7 @@
   </horizontal>
   
   <!--World Particles-->
-  <settings-submenu text='&#62; World Particles...' hover-hint='Enable/Disable world particles and camera noise.'>
+  <settings-submenu text='&#62; World Particles...'>
     <settings-container>
       <bool-setting text='Camera Noise' value='cameraNoiseEnable'></bool-setting>
       <bool-setting text='Global Dust Particles' value='dustParticleEnable'></bool-setting>
@@ -14,7 +14,7 @@
   </settings-submenu>
   
   <!--Note Cut Particles-->
-  <settings-submenu text='&#62; Note Cut Particles...' hover-hint='Modify or disable note cut particles.'>
+  <settings-submenu text='&#62; Note Cut Particles...'>
     <settings-container>
       <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Slash Particle Lifetime' value='slashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
@@ -28,10 +28,11 @@
   </settings-submenu>
   
   <!--Saber Clash Particles-->
-  <settings-submenu text='&#62; Saber Clash Particles...' hover-hint='Modify or disable saber clash particles.'>
+  <settings-submenu text='&#62; Saber Clash Particles...'>
     <settings-container>
       <list-setting text='Clash Particles' value='clashParticleChoice' choices='clashParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Clash Particles Lifetime' value='clashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <bool-setting text='Clash Glow' value='clashGlowEnable'></bool-setting>
 
       <clickable-text text='&#60; Back' align='Left' click-event='back' />
     </settings-container>
