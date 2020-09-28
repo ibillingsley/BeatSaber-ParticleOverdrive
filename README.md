@@ -10,6 +10,8 @@
 * Disable global particle haze
 * Configure slash particle amount and lifetime
 * Configure explosion particle amount and lifetime
+* Configure saber clash particle amound and lifetime
+* Disable saber clash glow
 * Add rainbow colors to particles
 
 ## Usage
