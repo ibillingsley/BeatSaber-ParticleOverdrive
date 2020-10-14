@@ -16,7 +16,7 @@ namespace ParticleOverdrive
     public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.5.0";
+        public string Version => "1.6.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
@@ -28,7 +28,7 @@ namespace ParticleOverdrive
         #region Private Field Getters
 
         internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetExplosionPS;
-        internal static RefGetter<NoteCutParticlesEffect, ParticleSystem[]> GetSparklesPS;
+        internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetSparklesPS;
         internal static RefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering> GetBlueNoiseDithering;
         internal static RefGetter<BlueNoiseDithering, Texture2D> GetNoiseTexture;
         internal static RefGetter<SaberClashEffect, ParticleSystem> GetSaberClashGlowPS;
@@ -90,7 +90,7 @@ namespace ParticleOverdrive
             try
             {
                 GetExplosionPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionPS");
-                GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem[]>("_sparklesPS");
+                GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_sparklesPS");
                 GetSaberClashGlowPS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_glowParticleSystem");
                 GetSaberClashSparklePS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_sparkleParticleSystem");
                 SlashExplosionParticlesEnabled = true;
