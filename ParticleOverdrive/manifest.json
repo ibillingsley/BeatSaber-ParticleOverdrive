@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/beat-saber-modding-group/BSIPA-MetadataFileSchema/master/Schema.json",
   "author": "lolPants",
   "description": "A mod for adjusting particle settings in Beat Saber",
-  "gameVersion": "1.12.1",
+  "gameVersion": "1.12.2",
   "id": "Particle Overdrive",
   "name": "Particle Overdrive",
   "version": "1.6.0",
