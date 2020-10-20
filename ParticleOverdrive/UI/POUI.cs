@@ -244,6 +244,17 @@ namespace ParticleOverdrive.UI
             }
         }
 
+        [UIValue("noteCoreParticlesEnable")]
+        public bool _noteCoreParticlesEnable
+        {
+            get => Config.NoteCoreParticles;
+            set
+            {
+                Plugin.NoteCoreParticles = value;
+                Config.NoteCoreParticles = value;
+            }
+        }
+
         [UIValue("clashParticleChoice")]
         public float _clashParticleMultiplier
         {

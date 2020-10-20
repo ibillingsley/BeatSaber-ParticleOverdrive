@@ -16,7 +16,7 @@ namespace ParticleOverdrive
     public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.6.0";
+        public string Version => "1.7.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
@@ -29,6 +29,7 @@ namespace ParticleOverdrive
 
         internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetExplosionPS;
         internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetSparklesPS;
+        internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetCorePS;
         internal static RefGetter<BlueNoiseDitheringUpdater, BlueNoiseDithering> GetBlueNoiseDithering;
         internal static RefGetter<BlueNoiseDithering, Texture2D> GetNoiseTexture;
         internal static RefGetter<SaberClashEffect, ParticleSystem> GetSaberClashGlowPS;
@@ -49,6 +50,7 @@ namespace ParticleOverdrive
         //public static float SlashParticleSpeedMultiplier;
         public static bool ClashGlow;
         public static bool RainbowParticles;
+        public static bool NoteCoreParticles;
 
         [Init]
         public void Init(IPA.Logging.Logger logger)
@@ -69,6 +71,7 @@ namespace ParticleOverdrive
             //SlashParticleSpeedMultiplier = Config.SlashParticleSpeedMultiplier;
             ClashGlow = Config.ClashGlow;
             RainbowParticles = Config.RainbowParticles;
+            NoteCoreParticles = Config.NoteCoreParticles;
         }
 
         [OnStart]
@@ -91,6 +94,7 @@ namespace ParticleOverdrive
             {
                 GetExplosionPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionPS");
                 GetSparklesPS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_sparklesPS");
+                GetCorePS = Utilities.CreateRefGetter<NoteCutParticlesEffect, ParticleSystem>("_explosionCorePS");
                 GetSaberClashGlowPS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_glowParticleSystem");
                 GetSaberClashSparklePS = Utilities.CreateRefGetter<SaberClashEffect, ParticleSystem>("_sparkleParticleSystem");
                 SlashExplosionParticlesEnabled = true;

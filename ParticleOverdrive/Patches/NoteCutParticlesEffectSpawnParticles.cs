@@ -11,6 +11,7 @@ namespace ParticleOverdrive.Patches
         {
             ParticleSystem explosionPS = Plugin.GetExplosionPS(__instance);
             ParticleSystem sparklesPS = Plugin.GetSparklesPS(__instance);
+            ParticleSystem corePS = Plugin.GetCorePS(__instance);
 
             sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * Plugin.SlashParticleMultiplier);
             explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * Plugin.ExplosionParticleMultiplier);
@@ -26,6 +27,12 @@ namespace ParticleOverdrive.Patches
             ParticleSystem.MainModule explosionMain = explosionPS.main;
             explosionMain.maxParticles = int.MaxValue;
             explosionMain.startLifetimeMultiplier = Plugin.ExplosionParticleLifetimeMultiplier;
+
+            ParticleSystem.MainModule coreMain = corePS.main;
+            if (!Plugin.NoteCoreParticles)
+            {
+                coreMain.startLifetimeMultiplier = 0;
+            }
         }
     }
 

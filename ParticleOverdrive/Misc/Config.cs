@@ -96,6 +96,19 @@ namespace ParticleOverdrive.Misc
             }
         }
 
+        static readonly string noteCoreParticles = "NoteCoreParticles";
+        internal static bool NoteCoreParticles
+        {
+            get
+            {
+                return config.GetBool(sectionParticles, noteCoreParticles, true, true);
+            }
+            set
+            {
+                config.SetBool(sectionParticles, noteCoreParticles, value);
+            }
+        }
+
         static readonly string clashParticleMultiplier = "ClashParticleMultiplier";
         internal static float ClashParticleMultiplier
         {
