@@ -21,8 +21,8 @@
       <!--<list-setting text='Slash Particle Speed' value='slashParticleSpeedChoice' choices='slashParticleSpeedChoices' formatter='multiplierFormatter'></list-setting>-->
       <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <bool-setting text='Core Particles' value='noteCoreParticlesEnable' />
       <bool-setting text='Rainbow Particles' value='rainbowParticlesEnable' />
-      <bool-setting text='Note Core Particles' value='noteCoreParticlesEnable' />
 
       <clickable-text text='&#60; Back' align='Left' click-event='back' />
     </settings-container>
