@@ -44,6 +44,19 @@ namespace ParticleOverdrive.Misc
             }
         }
 
+        static readonly string slashParticleSizeMultiplier = "SlashParticleSizeMultiplier";
+        internal static float SlashParticleSizeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, slashParticleSizeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, slashParticleSizeMultiplier, value);
+            }
+        }
+
         //static readonly string slashParticleSpeedMultiplier = "SlashParticleSpeedMultiplier";
         //internal static float SlashParticleSpeedMultiplier
         //{
@@ -80,6 +93,19 @@ namespace ParticleOverdrive.Misc
             set
             {
                 config.SetFloat(sectionParticles, explosionParticleLifetimeMultiplier, value);
+            }
+        }
+
+        static readonly string explosionParticleSizeMultiplier = "ExplosionParticleSizeMultiplier";
+        internal static float ExplosionParticleSizeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, explosionParticleSizeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, explosionParticleSizeMultiplier, value);
             }
         }
 
@@ -132,6 +158,19 @@ namespace ParticleOverdrive.Misc
             set
             {
                 config.SetFloat(sectionParticles, clashParticleLifetimeMultiplier, value);
+            }
+        }
+
+        static readonly string clashParticleSizeMultiplier = "ClashParticleSizeMultiplier";
+        internal static float ClashParticleSizeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, clashParticleSizeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, clashParticleSizeMultiplier, value);
             }
         }
 

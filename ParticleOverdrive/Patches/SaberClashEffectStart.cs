@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Logger = ParticleOverdrive.Misc.Logger;
 
 
 namespace ParticleOverdrive.Patches
@@ -29,10 +30,16 @@ namespace ParticleOverdrive.Patches
                 glowMain.startLifetimeMultiplier = 0;
             }
 
+            //Logger.Log("clash startLifetimeMultiplier is: " + sparkleMain.startLifetimeMultiplier, Logger.LogLevel.Debug);
+            //Logger.Log("clash startSizeMultiplier is: " + sparkleMain.startSizeMultiplier, Logger.LogLevel.Debug);
+
             sparkleEM.rateOverDistanceMultiplier = sparkleEM.rateOverDistanceMultiplier * Plugin.ClashParticleMultiplier;
             sparkleEM.rateOverTimeMultiplier = sparkleEM.rateOverTimeMultiplier * Plugin.ClashParticleMultiplier;
             sparkleMain.maxParticles = int.MaxValue;
-            sparkleMain.startLifetimeMultiplier = Plugin.ClashParticleLifetimeMultiplier;
+            // default start lifetime multiplier is 0.3
+            sparkleMain.startLifetimeMultiplier = Plugin.ClashParticleLifetimeMultiplier * 0.3f;
+            // default start size multiplier is 0.008
+            sparkleMain.startSizeMultiplier = Plugin.ClashParticleSizeMultiplier * 0.008f;
         }
     }
 }

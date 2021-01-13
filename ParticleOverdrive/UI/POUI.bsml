@@ -18,9 +18,11 @@
     <settings-container>
       <list-setting text='Slash Particles' value='slashParticleChoice' choices='slashParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Slash Particle Lifetime' value='slashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Slash Particle Size' value='slashParticleSizeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
       <!--<list-setting text='Slash Particle Speed' value='slashParticleSpeedChoice' choices='slashParticleSpeedChoices' formatter='multiplierFormatter'></list-setting>-->
       <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Explosion Particle Size' value='explosionParticleSizeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
       <bool-setting text='Core Particles' value='noteCoreParticlesEnable' />
       <bool-setting text='Rainbow Particles' value='rainbowParticlesEnable' />
 
@@ -33,6 +35,7 @@
     <settings-container>
       <list-setting text='Clash Particles' value='clashParticleChoice' choices='clashParticleChoices' formatter='multiplierFormatter'></list-setting>
       <list-setting text='Clash Particles Lifetime' value='clashParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Clash Particles Size' value='clashParticleSizeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
       <bool-setting text='Clash Glow' value='clashGlowEnable'></bool-setting>
 
       <clickable-text text='&#60; Back' align='Left' click-event='back' />

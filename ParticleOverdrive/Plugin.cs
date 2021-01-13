@@ -16,7 +16,7 @@ namespace ParticleOverdrive
     public class Plugin
     {
         public string Name => "Particle Overdive";
-        public string Version => "1.7.0";
+        public string Version => "1.7.1";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
@@ -47,6 +47,9 @@ namespace ParticleOverdrive
         public static float SlashParticleLifetimeMultiplier;
         public static float ExplosionParticleLifetimeMultiplier;
         public static float ClashParticleLifetimeMultiplier;
+        public static float SlashParticleSizeMultiplier;
+        public static float ExplosionParticleSizeMultiplier;
+        public static float ClashParticleSizeMultiplier;
         //public static float SlashParticleSpeedMultiplier;
         public static bool ClashGlow;
         public static bool RainbowParticles;
@@ -68,6 +71,9 @@ namespace ParticleOverdrive
             SlashParticleLifetimeMultiplier = Config.SlashParticleLifetimeMultiplier;
             ExplosionParticleLifetimeMultiplier = Config.ExplosionParticleLifetimeMultiplier;
             ClashParticleLifetimeMultiplier = Config.ClashParticleLifetimeMultiplier;
+            SlashParticleSizeMultiplier = Config.SlashParticleSizeMultiplier;
+            ExplosionParticleSizeMultiplier = Config.ExplosionParticleSizeMultiplier;
+            ClashParticleSizeMultiplier = Config.ClashParticleSizeMultiplier;
             //SlashParticleSpeedMultiplier = Config.SlashParticleSpeedMultiplier;
             ClashGlow = Config.ClashGlow;
             RainbowParticles = Config.RainbowParticles;

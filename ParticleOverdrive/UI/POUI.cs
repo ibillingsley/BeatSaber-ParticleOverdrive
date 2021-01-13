@@ -196,6 +196,17 @@ namespace ParticleOverdrive.UI
             }
         }
 
+        [UIValue("slashParticleSizeChoice")]
+        public float _slashParticleSizeMultiplier
+        {
+            get => Config.SlashParticleSizeMultiplier;
+            set
+            {
+                Plugin.SlashParticleSizeMultiplier = value;
+                Config.SlashParticleSizeMultiplier = value;
+            }
+        }
+
         //[UIValue("slashParticleSpeedChoice")]
         //public float _slashParticleSpeedMultiplier
         //{
@@ -219,7 +230,6 @@ namespace ParticleOverdrive.UI
             }
         }
 
-
         [UIValue("explosionParticleLifetimeChoice")]
         public float _explosionParticleLifetimeMultiplier
         {
@@ -229,6 +239,18 @@ namespace ParticleOverdrive.UI
             {
                 Plugin.ExplosionParticleLifetimeMultiplier = value;
                 Config.ExplosionParticleLifetimeMultiplier = value;
+            }
+        }
+
+        [UIValue("explosionParticleSizeChoice")]
+        public float _explosionParticleSizeMultiplier
+        {
+            //get => Config.ExplosionParticleLifetimeMultiplier;
+            get => Config.ExplosionParticleSizeMultiplier;
+            set
+            {
+                Plugin.ExplosionParticleSizeMultiplier = value;
+                Config.ExplosionParticleSizeMultiplier = value;
             }
         }
 
@@ -277,6 +299,18 @@ namespace ParticleOverdrive.UI
             {
                 Plugin.ClashParticleLifetimeMultiplier = value;
                 Config.ClashParticleLifetimeMultiplier = value;
+            }
+        }
+
+        [UIValue("clashParticleSizeChoice")]
+        public float _clashParticleSizeMultiplier
+        {
+            //get => Config.ClashParticleMultiplier;
+            get => Config.ClashParticleSizeMultiplier;
+            set
+            {
+                Plugin.ClashParticleSizeMultiplier = value;
+                Config.ClashParticleSizeMultiplier = value;
             }
         }
 
