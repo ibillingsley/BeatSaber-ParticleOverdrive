@@ -8,10 +8,11 @@
 ## Features
 * Disable Camera Noise
 * Disable global particle haze
-* Configure note slash particle amount and lifetime
-* Configure note explosion particle amount and lifetime
+* Configure note slash particle amount, lifetime and size
+* Configure note explosion particle amount, lifetime and size
 * Disable note core particles
-* Configure saber clash particle amound and lifetime
+* Configure saber clash particle amount, lifetime and size
+* Configure saber wall particle amount, lifetime and size
 * Disable saber clash glow
 * Add rainbow colors to particles
 
