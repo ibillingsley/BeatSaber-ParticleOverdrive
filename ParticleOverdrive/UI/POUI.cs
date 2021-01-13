@@ -144,6 +144,9 @@ namespace ParticleOverdrive.UI
         [UIValue("clashParticleChoices")]
         private List<object> _clashParticleMultiplierChoices = particleMultiplierChoicesList;
 
+        [UIValue("obstacleParticleChoices")]
+        private List<object> _obstacleParticleMultiplierChoices = particleMultiplierChoicesList;
+
         [UIValue("lifetimeChoices")]
         private List<object> _lifetimeChoices = LifetimeValues;
 
@@ -322,6 +325,43 @@ namespace ParticleOverdrive.UI
             {
                 Plugin.ClashGlow = value;
                 Config.ClashGlow = value;
+            }
+        }
+
+        [UIValue("obstacleParticleChoice")]
+        public float _obstacleParticleMultiplier
+        {
+            //get => Config.ObstacleParticleMultiplier;
+            get => Config.ObstacleParticleMultiplier;
+            set
+            {
+                Plugin.ObstacleParticleMultiplier = value;
+                Config.ObstacleParticleMultiplier = value;
+            }
+        }
+
+
+        [UIValue("obstacleParticleLifetimeChoice")]
+        public float _obstacleParticleLifetimeMultiplier
+        {
+            //get => Config.ObstacleParticleMultiplier;
+            get => Config.ObstacleParticleLifetimeMultiplier;
+            set
+            {
+                Plugin.ObstacleParticleLifetimeMultiplier = value;
+                Config.ObstacleParticleLifetimeMultiplier = value;
+            }
+        }
+
+        [UIValue("obstacleParticleSizeChoice")]
+        public float _obstacleParticleSizeMultiplier
+        {
+            //get => Config.ObstacleParticleMultiplier;
+            get => Config.ObstacleParticleSizeMultiplier;
+            set
+            {
+                Plugin.ObstacleParticleSizeMultiplier = value;
+                Config.ObstacleParticleSizeMultiplier = value;
             }
         }
 

@@ -42,4 +42,15 @@
     </settings-container>
   </settings-submenu>
   
+  <!-- Obstacle Saber Particles-->
+  <settings-submenu text='&#62; Saber Wall Particles...'>
+    <settings-container>
+      <list-setting text='Wall Particles' value='obstacleParticleChoice' choices='obstacleParticleChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Wall Particles Lifetime' value='obstacleParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+      <list-setting text='Wall Particles Size' value='obstacleParticleSizeChoice' choices='lifetimeChoices' formatter='multiplierFormatter'></list-setting>
+
+      <clickable-text text='&#60; Back' align='Left' click-event='back' />
+    </settings-container>
+  </settings-submenu>
+  
 </settings-container>

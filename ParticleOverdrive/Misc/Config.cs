@@ -174,6 +174,45 @@ namespace ParticleOverdrive.Misc
             }
         }
 
+        static readonly string obstacleParticleMultiplier = "ObstacleParticleMultiplier";
+        internal static float ObstacleParticleMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, obstacleParticleMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, obstacleParticleMultiplier, value);
+            }
+        }
+
+        static readonly string obstacleParticleLifetimeMultiplier = "ObstacleParticleLifetimeMultiplier";
+        internal static float ObstacleParticleLifetimeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, obstacleParticleLifetimeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, obstacleParticleLifetimeMultiplier, value);
+            }
+        }
+
+        static readonly string obstacleParticleSizeMultiplier = "ObstacleParticleSizeMultiplier";
+        internal static float ObstacleParticleSizeMultiplier
+        {
+            get
+            {
+                return config.GetFloat(sectionParticles, obstacleParticleSizeMultiplier, 1.0f, true);
+            }
+            set
+            {
+                config.SetFloat(sectionParticles, obstacleParticleSizeMultiplier, value);
+            }
+        }
+
         static readonly string clashGlow = "ClashGlow";
         internal static bool ClashGlow
         {
