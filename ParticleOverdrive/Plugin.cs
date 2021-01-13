@@ -15,8 +15,8 @@ namespace ParticleOverdrive
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
     {
-        public string Name => "Particle Overdive";
-        public string Version => "1.7.2";
+        public string Name => "Particle Overdrive";
+        public string Version => "1.8.0";
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MenuViewControllers", "GameCore", "Credits" };
