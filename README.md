@@ -21,3 +21,18 @@ You can either configure the plugin by editing `UserData\ParticleOverdrive.ini`,
 
 ## Thanks
 * **SkyKiwi** // Creating ChromaToggle, the mod that inspired this mod. (I also used some of it's code as a starting point `<3`)
+
+## Developers
+
+### Contributing to ParticleOverdrive
+In order to build this project, please add a `ParticleOverdrive.csproj.user` file in the project directory and specify where your game is located on your disk:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Change this path if necessary. Make sure it ends with a backslash. -->
+    <GameDirPath>C:\Program Files\Steam\steamapps\common\Beat Saber\</GameDirPath>
+  </PropertyGroup>
+</Project>
+```
