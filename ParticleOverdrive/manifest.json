@@ -2,14 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/beat-saber-modding-group/BSIPA-MetadataFileSchema/master/Schema.json",
   "author": "lolPants",
   "description": "A mod for adjusting particle settings in Beat Saber",
-  "gameVersion": "1.13.4",
+  "gameVersion": "1.16.0",
   "id": "Particle Overdrive",
   "name": "Particle Overdrive",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "dependsOn": {
     "BSIPA": "^4.0.0",
-    "BeatSaberMarkupLanguage": "^1.2.0",
-    "BS Utils": "^1.4.11"
+    "BeatSaberMarkupLanguage": "^1.4.0",
+    "BS Utils": "^1.9.0"
   },
   "loadAfter": [ "BS Utils", "BeatSaberMarkupLanguage" ],
   "links": {
