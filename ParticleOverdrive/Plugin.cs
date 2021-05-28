@@ -24,7 +24,6 @@ namespace ParticleOverdrive
         public static GameObject _controller;
         public static WorldParticleController _particleController;
         public static CameraNoiseController _noiseController;
-        internal static bool IsBSMLMenuLoaded = false;
 
         #region Private Field Getters
         internal static RefGetter<NoteCutParticlesEffect, ParticleSystem> GetExplosionPS;
@@ -138,6 +137,7 @@ namespace ParticleOverdrive
             }
 
             AddEvents();
+            BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
         }
 
         [OnExit]
@@ -148,11 +148,6 @@ namespace ParticleOverdrive
 
         public void OnActiveSceneChanged(Scene prevScene, Scene scene)
         {
-            if (scene.name == "MainMenu" && !IsBSMLMenuLoaded)
-            {
-                BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", UI.POUI.instance);
-                IsBSMLMenuLoaded = true;
-            }
             LoadConfig();
             if (!CameraNoiseWorldParticlesEnabled)
                 return;

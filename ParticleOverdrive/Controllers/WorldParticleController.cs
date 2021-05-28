@@ -42,6 +42,7 @@ namespace ParticleOverdrive.Controllers
 
         private ParticleSystem Find()
         {
+            // This needs updating, as this doesn't find inactive Objects and the menu object persists now
             ParticleSystem[] pss = FindObjectsOfType<ParticleSystem>();
             return pss.Where(x => x.name == "DustPS").FirstOrDefault();
         }
