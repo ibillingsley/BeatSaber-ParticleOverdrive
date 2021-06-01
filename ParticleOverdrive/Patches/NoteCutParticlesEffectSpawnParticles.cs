@@ -20,7 +20,7 @@ namespace ParticleOverdrive.Patches
 
             if (Plugin.RainbowParticles)
             {
-                var generatedColor = Color.HSVToRGB(Random.value, 1f, 1f);
+                Color generatedColor = Color.HSVToRGB(Random.value, 1f, 1f);
                 generatedColor.a = 0.5f;
                 color = generatedColor;
             }
