@@ -32,7 +32,7 @@ In order to build this project, you'll need a local, modded installation of Beat
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!-- Change this path if necessary. Make sure it doesn't end with a backslash. -->
-    <BeatSaberDir>C:\Program Files\Steam\steamapps\common\Beat Saber\</BeatSaberDir>
+    <BeatSaberDir>C:\Program Files\Steam\steamapps\common\Beat Saber</BeatSaberDir>
   </PropertyGroup>
 </Project>
 ```
