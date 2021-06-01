@@ -19,7 +19,11 @@ namespace ParticleOverdrive.Patches
             lifetimeMultiplier *= Plugin.SlashParticleLifetimeMultiplier;
 
             if (Plugin.RainbowParticles)
-                color = UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1, 1, 1);
+            {
+                var generatedColor = Color.HSVToRGB(Random.value, 1f, 1f);
+                generatedColor.a = 0.5f;
+                color = generatedColor;
+            }
 
             ParticleSystem.MainModule slashMain = sparklesPS.main;
             //Logger.Log("slash startSizeMultiplier is: " + slashMain.startSizeMultiplier, Logger.LogLevel.Debug);
