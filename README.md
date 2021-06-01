@@ -25,14 +25,14 @@ You can either configure the plugin by editing `UserData\ParticleOverdrive.ini`,
 ## Developers
 
 ### Contributing to ParticleOverdrive
-In order to build this project, please add a `ParticleOverdrive.csproj.user` file in the project directory and specify where your game is located on your disk:
+In order to build this project, you'll need a local, modded installation of Beat Saber with the required mod dependencies installed. Add a `ParticleOverdrive.csproj.user` file in the project directory and specify where your game is located on your disk:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <!-- Change this path if necessary. Make sure it ends with a backslash. -->
-    <GameDirPath>C:\Program Files\Steam\steamapps\common\Beat Saber\</GameDirPath>
+    <!-- Change this path if necessary. Make sure it doesn't end with a backslash. -->
+    <BeatSaberDir>C:\Program Files\Steam\steamapps\common\Beat Saber\</BeatSaberDir>
   </PropertyGroup>
 </Project>
 ```
