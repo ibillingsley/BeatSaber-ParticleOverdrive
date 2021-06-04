@@ -19,6 +19,11 @@
 ## Usage
 You can either configure the plugin by editing `UserData\ParticleOverdrive.ini`, but the preferred method of configuration is using the in-game settings menu.  
 
+## Known Issues/Mod Interactions
+* Interactions with Tweaks55: If you have Particle Overdrive and Tweaks55 installed at the same time, expect the following behaviour:
+  * Tweaks55 will override the global dust particle setting in Particle Overdrive
+  * Disabling any particle sources in Tweaks55 (such as wall clash or saber clash) will disable the corresponding particles and overwrite any Particle Overdrive settings for those particles
+
 ## Thanks
 * **SkyKiwi** // Creating ChromaToggle, the mod that inspired this mod. (I also used some of it's code as a starting point `<3`)
 
