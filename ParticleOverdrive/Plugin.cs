@@ -12,11 +12,17 @@ using Logger = ParticleOverdrive.Misc.Logger;
 
 namespace ParticleOverdrive
 {
+    public static class BuildInfo
+    {
+        public const string Name = "Particle Overdrive";
+        public const string Version = "1.12.0";
+    }
+
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
     {
-        public string Name => "Particle Overdrive";
-        public string Version => "1.12.0";
+        public string Name => BuildInfo.Name;
+        public string Version => BuildInfo.Version;
         IPA.Logging.Logger log;
 
         private static readonly string[] env = { "Init", "MainMenu", "GameCore", "Credits" };
