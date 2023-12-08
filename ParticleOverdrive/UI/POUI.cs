@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ParticleOverdrive.UI
 {
-    public class POUI : PersistentSingleton<POUI>
+    public class POUI
     {
         internal const float Infinity = 100000f;
         public static readonly List<object> particleMultiplierChoicesList = new List<object>()
