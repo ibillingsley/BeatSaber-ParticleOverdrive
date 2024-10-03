@@ -6,7 +6,13 @@ namespace ParticleOverdrive.UI
 {
     public class POUI
     {
-        internal const float Infinity = 100000f;
+        private readonly ParticleConfig _config;
+
+        private POUI(ParticleConfig config)
+        {
+            _config = config;
+        }
+
         public static readonly List<object> particleMultiplierChoicesList = new List<object>()
         {
             0f,
@@ -135,9 +141,6 @@ namespace ParticleOverdrive.UI
         [UIValue("slashParticleChoices")]
         private List<object> _slashParticleMultiplierChoices = particleMultiplierChoicesList;
 
-        [UIValue("slashParticleSpeedChoices")]
-        private List<object> _slashParticleSpeedChoices = particleMultiplierChoicesList;
-
         [UIValue("explosionParticleChoices")]
         private List<object> _explosionParticleMultiplierChoices = particleMultiplierChoicesList;
 
@@ -153,222 +156,125 @@ namespace ParticleOverdrive.UI
         [UIValue("cameraNoiseEnable")]
         public bool _cameraNoiseEnable
         {
-            //get => Plugin._noiseController.Enabled;
-            get => Config.CameraGrain;
-            set
-            {
-
-                if (Plugin.CameraNoiseWorldParticlesEnabled)
-                    Plugin._noiseController.Enabled = value;
-                Config.CameraGrain = value;
-            }
+            get => _config.CameraGrain;
+            set => _config.CameraGrain = value;
         }
 
         [UIValue("dustParticleEnable")]
         public bool _dustParticleEnable
         {
-            //get => Plugin._particleController.Enabled;
-            get => Config.DustParticles;
-            set
-            {
-                if (Plugin.CameraNoiseWorldParticlesEnabled)
-                    Plugin._particleController.Enabled = value;
-                Config.DustParticles = value;
-            }
+            get => _config.DustParticles;
+            set => _config.DustParticles = value;
         }
 
         [UIValue("slashParticleChoice")]
         public float _slashParticleMultiplier
         {
-            get => Config.SlashParticleMultiplier;
-            set
-            {
-                Plugin.SlashParticleMultiplier = value;
-                Config.SlashParticleMultiplier = value;
-            }
+            get => _config.SlashParticleMultiplier;
+            set => _config.SlashParticleMultiplier = value;
         }
 
         [UIValue("slashParticleLifetimeChoice")]
         public float _slashParticleLifetimeMultiplier
         {
-            get => Config.SlashParticleLifetimeMultiplier;
-            set
-            {
-                Plugin.SlashParticleLifetimeMultiplier = value;
-                Config.SlashParticleLifetimeMultiplier = value;
-            }
+            get => _config.SlashParticleLifetimeMultiplier;
+            set => _config.SlashParticleLifetimeMultiplier = value;
         }
 
         [UIValue("slashParticleSizeChoice")]
         public float _slashParticleSizeMultiplier
         {
-            get => Config.SlashParticleSizeMultiplier;
-            set
-            {
-                Plugin.SlashParticleSizeMultiplier = value;
-                Config.SlashParticleSizeMultiplier = value;
-            }
+            get => _config.SlashParticleSizeMultiplier;
+            set => _config.SlashParticleSizeMultiplier = value;
         }
-
-        //[UIValue("slashParticleSpeedChoice")]
-        //public float _slashParticleSpeedMultiplier
-        //{
-        //    get => Config.SlashParticleSpeedMultiplier;
-        //    set
-        //    {
-        //        Plugin.SlashParticleSpeedMultiplier = value;
-        //        Config.SlashParticleSpeedMultiplier = value;
-        //    }
-        //}
 
         [UIValue("explosionParticleChoice")]
         public float _explosionParticleMultiplier
         {
-            //get => Config.ExplosionParticleMultiplier;
-            get => Config.ExplosionParticleMultiplier;
-            set
-            {
-                Plugin.ExplosionParticleMultiplier = value;
-                Config.ExplosionParticleMultiplier = value;
-            }
+            get => _config.ExplosionParticleMultiplier;
+            set => _config.ExplosionParticleMultiplier = value;
         }
 
         [UIValue("explosionParticleLifetimeChoice")]
         public float _explosionParticleLifetimeMultiplier
         {
-            //get => Config.ExplosionParticleLifetimeMultiplier;
-            get => Config.ExplosionParticleLifetimeMultiplier;
-            set
-            {
-                Plugin.ExplosionParticleLifetimeMultiplier = value;
-                Config.ExplosionParticleLifetimeMultiplier = value;
-            }
+            get => _config.ExplosionParticleLifetimeMultiplier;
+            set => _config.ExplosionParticleLifetimeMultiplier = value;
         }
 
         [UIValue("explosionParticleSizeChoice")]
         public float _explosionParticleSizeMultiplier
         {
-            //get => Config.ExplosionParticleLifetimeMultiplier;
-            get => Config.ExplosionParticleSizeMultiplier;
-            set
-            {
-                Plugin.ExplosionParticleSizeMultiplier = value;
-                Config.ExplosionParticleSizeMultiplier = value;
-            }
+            get => _config.ExplosionParticleSizeMultiplier;
+            set => _config.ExplosionParticleSizeMultiplier = value;
         }
 
         [UIValue("rainbowParticlesEnable")]
         public bool _rainbowParticlesEnable
         {
-            //get => Plugin._noiseController.Enabled;
-            get => Config.RainbowParticles;
-            set
-            {
-                Plugin.RainbowParticles = value;
-                Config.RainbowParticles = value;
-            }
+            get => _config.RainbowParticles;
+            set => _config.RainbowParticles = value;
         }
 
         [UIValue("noteCoreParticlesEnable")]
         public bool _noteCoreParticlesEnable
         {
-            get => Config.NoteCoreParticles;
-            set
-            {
-                Plugin.NoteCoreParticles = value;
-                Config.NoteCoreParticles = value;
-            }
+            get => _config.NoteCoreParticles;
+            set => _config.NoteCoreParticles = value;
         }
 
         [UIValue("clashParticleChoice")]
         public float _clashParticleMultiplier
         {
-            //get => Config.ClashParticleMultiplier;
-            get => Config.ClashParticleMultiplier;
-            set
-            {
-                Plugin.ClashParticleMultiplier = value;
-                Config.ClashParticleMultiplier = value;
-            }
+            get => _config.ClashParticleMultiplier;
+            set => _config.ClashParticleMultiplier = value;
         }
 
 
         [UIValue("clashParticleLifetimeChoice")]
         public float _clashParticleLifetimeMultiplier
         {
-            //get => Config.ClashParticleMultiplier;
-            get => Config.ClashParticleLifetimeMultiplier;
-            set
-            {
-                Plugin.ClashParticleLifetimeMultiplier = value;
-                Config.ClashParticleLifetimeMultiplier = value;
-            }
+            get => _config.ClashParticleLifetimeMultiplier;
+            set => _config.ClashParticleLifetimeMultiplier = value;
         }
 
         [UIValue("clashParticleSizeChoice")]
         public float _clashParticleSizeMultiplier
         {
-            //get => Config.ClashParticleMultiplier;
-            get => Config.ClashParticleSizeMultiplier;
-            set
-            {
-                Plugin.ClashParticleSizeMultiplier = value;
-                Config.ClashParticleSizeMultiplier = value;
-            }
+            get => _config.ClashParticleSizeMultiplier;
+            set => _config.ClashParticleSizeMultiplier = value;
         }
 
         [UIValue("clashGlowEnable")]
         public bool _clashGlowEnable
         {
-            get => Config.ClashGlow;
-            set
-            {
-                Plugin.ClashGlow = value;
-                Config.ClashGlow = value;
-            }
+            get => _config.ClashGlow;
+            set => _config.ClashGlow = value;
         }
 
         [UIValue("obstacleParticleChoice")]
         public float _obstacleParticleMultiplier
         {
-            //get => Config.ObstacleParticleMultiplier;
-            get => Config.ObstacleParticleMultiplier;
-            set
-            {
-                Plugin.ObstacleParticleMultiplier = value;
-                Config.ObstacleParticleMultiplier = value;
-            }
+            get => _config.ObstacleParticleMultiplier;
+            set => _config.ObstacleParticleMultiplier = value;
         }
-
+         
 
         [UIValue("obstacleParticleLifetimeChoice")]
         public float _obstacleParticleLifetimeMultiplier
         {
-            //get => Config.ObstacleParticleMultiplier;
-            get => Config.ObstacleParticleLifetimeMultiplier;
-            set
-            {
-                Plugin.ObstacleParticleLifetimeMultiplier = value;
-                Config.ObstacleParticleLifetimeMultiplier = value;
-            }
+            get => _config.ObstacleParticleLifetimeMultiplier;
+            set => _config.ObstacleParticleLifetimeMultiplier = value;
         }
 
         [UIValue("obstacleParticleSizeChoice")]
         public float _obstacleParticleSizeMultiplier
         {
-            //get => Config.ObstacleParticleMultiplier;
-            get => Config.ObstacleParticleSizeMultiplier;
-            set
-            {
-                Plugin.ObstacleParticleSizeMultiplier = value;
-                Config.ObstacleParticleSizeMultiplier = value;
-            }
+            get => _config.ObstacleParticleSizeMultiplier;
+            set => _config.ObstacleParticleSizeMultiplier = value;
         }
 
         [UIAction("multiplierFormatter")]
-        public string multiplierDisplay(float multiplier)
-        {
-            return $"{multiplier * 100f}%";
-        }
+        public string MultiplierDisplay(float multiplier) => $"{multiplier * 100f}%";
     }
 }

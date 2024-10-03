@@ -1,105 +1,42 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using ParticleOverdrive.Misc;
-using Logger = ParticleOverdrive.Misc.Logger;
-using BS_Utils.Utilities;
+using Zenject;
 
 namespace ParticleOverdrive.Controllers
 {
-    public class CameraNoiseController : MonoBehaviour, IGlobalController
+    public class CameraNoiseController : IInitializable
     {
-        private BlueNoiseDitheringUpdater _ditheringUpdater;
-        public BlueNoiseDitheringUpdater DitheringUpdater
+        private readonly ParticleConfig _config;
+        private readonly Texture2D _blankNoiseTexture;
+
+        private CameraNoiseController(ParticleConfig config)
         {
-            get
-            {
-                if (_ditheringUpdater == null)
-                    _ditheringUpdater = Find();
-
-                return _ditheringUpdater;
-            }
-        }
-
-        private bool _enabled;
-        public bool Enabled
-        {
-            get => _enabled;
-            set
-            {
-                string action = value ? "Enabling" : "Disabling";
-                Logger.Log($"{action} camera noise!");
-
-                _enabled = value;
-                Set();
-            }
-        }
-
-        private Texture2D _originalNoise;
-        private Texture2D _newNoise;
-
-        public void Init(bool state)
-        {
-            DontDestroyOnLoad(this);
-
-            _newNoise = Texture2D.blackTexture;
-
-            Color32[] pixels = _newNoise.GetPixels32();
+            _config = config;
+            _blankNoiseTexture = Texture2D.blackTexture;
+            Color32 black = new(0, 0, 0, 255);
+            Color32[] pixels = _blankNoiseTexture.GetPixels32();
             for (int i = 0; i < pixels.Length; i++)
-                pixels[i] = new Color32(0, 0, 0, 255);
-
-            _newNoise.SetPixels32(pixels);
-            _newNoise.Apply();
-
-            _enabled = state;
+                pixels[i] = black;
+            _blankNoiseTexture.SetPixels32(pixels);
+            _blankNoiseTexture.Apply();
         }
 
-        private void Set()
-        {
-            BlueNoiseDithering _blueNoiseDithering = Plugin.GetBlueNoiseDithering(DitheringUpdater);
+        private BlueNoiseDitheringUpdater _ditheringUpdater;
+        private Texture2D _originalNoiseTexture;
 
-            if (_originalNoise == null)
+        public void Initialize()
+        {
+            _ditheringUpdater = GameObject.Find("BlueNoiseHelper").GetComponent<BlueNoiseDitheringUpdater>();
+            SetCameraNoiseActive(_config.CameraGrain);
+        }
+
+        public void SetCameraNoiseActive(bool active)
+        {
+            if (_ditheringUpdater != null)
             {
-                Logger.Log("Noise texture unset, caching original value...");
-                Texture2D orig = Plugin.GetNoiseTexture(_blueNoiseDithering);
-
-                _originalNoise = orig;
+                _originalNoiseTexture ??= _ditheringUpdater._blueNoiseDithering._noiseTexture;
+                _ditheringUpdater._blueNoiseDithering._noiseTexture = active ? _originalNoiseTexture : _blankNoiseTexture;
             }
-
-            if (_enabled)
-                Plugin.GetNoiseTexture(_blueNoiseDithering) = _originalNoise;
-            else
-                Plugin.GetNoiseTexture(_blueNoiseDithering) = _newNoise;
-        }
-
-        private BlueNoiseDitheringUpdater Find()
-        {
-            GameObject helper = GameObject.Find("BlueNoiseHelper");
-            return helper?.GetComponent<BlueNoiseDitheringUpdater>();
-        }
-
-        public void OnSceneChange(Scene scene)
-        {
-            StartCoroutine(SceneChangeHandler());
-        }
-
-        private IEnumerator SceneChangeHandler()
-        {
-            if (_ditheringUpdater == null)
-            {
-                Logger.Log("DitheringUpdater is null, checking for new one...");
-
-                while (_ditheringUpdater == null)
-                {
-                    yield return new WaitForSeconds(0.5f);
-                    _ditheringUpdater = Find();
-                }
-
-                Logger.Log("Found new DitheringUpdater!");
-            }
-
-            Set();
         }
     }
 }

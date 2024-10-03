@@ -1,4 +1,5 @@
-﻿using ParticleOverdrive.UI;
+﻿using ParticleOverdrive.Controllers;
+using ParticleOverdrive.UI;
 using Zenject;
 
 namespace ParticleOverdrive.Installers
