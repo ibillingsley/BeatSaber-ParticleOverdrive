@@ -1,36 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E4F80730-6FE1-4F83-AA49-B2749149E494}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>12</LangVersion>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ParticleOverdrive</RootNamespace>
-    <AssemblyName>ParticleOverdrive</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <LocalRefsDir Condition="Exists('..\Refs')">..\Refs</LocalRefsDir>
+    <BeatSaberDir>$(LocalRefsDir)</BeatSaberDir>
+    <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+  <PropertyGroup Condition="$(DefineConstants.Contains('CIBuild')) OR '$(NCrunch)' == '1'">
+    <DisableCopyToPlugins>True</DisableCopyToPlugins>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
+  <PropertyGroup Condition="'$(NCrunch)' == '1'">
+    <DisableCopyToPlugins>True</DisableCopyToPlugins>
+    <DisableZipRelease>True</DisableZipRelease>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -61,13 +46,6 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Main.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -86,20 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CameraNoiseController.cs" />
-    <Compile Include="Controllers\IGlobalController.cs" />
-    <Compile Include="Misc\Config.cs" />
-    <Compile Include="Misc\Logger.cs" />
-    <Compile Include="Patches\NoteCutParticlesEffectSpawnParticles.cs" />
-    <Compile Include="Patches\ObstacleSaberSparkleEffectAwake.cs" />
-    <Compile Include="Patches\SaberClashEffectStart.cs" />
-    <Compile Include="Plugin.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\WorldParticleController.cs" />
-    <Compile Include="UI\POUI.cs" />
-    <Compile Include="Utilities.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +71,13 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy ".\ParticleOverdrive.dll" "$(BeatSaberDir)\Plugins"</PostBuildEvent>
-  </PropertyGroup>
-  <ProjectExtensions />
+  <ItemGroup>
+    <PackageReference Include="BeatSaberModdingTools.Tasks">
+      <Version>2.0.0-beta1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
 </Project>
