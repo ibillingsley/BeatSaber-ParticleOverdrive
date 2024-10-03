@@ -7,24 +7,21 @@ using System;
 using System.Reflection;
 using System.Linq;
 using UnityEngine;
+using SiraUtil.Zenject;
+using IPA.Loader;
+using ParticleOverdrive.Installers;
 using UnityEngine.SceneManagement;
 using Logger = ParticleOverdrive.Misc.Logger;
+using IPALogger = IPA.Logging.Logger;
 
 namespace ParticleOverdrive
 {
-    public static class BuildInfo
-    {
-        public const string Name = "Particle Overdrive";
-        public const string Version = "1.12.0";
-    }
-
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
     {
-        public string Name => BuildInfo.Name;
-        public string Version => BuildInfo.Version;
-        IPA.Logging.Logger log;
-
+        public string Name { get; }
+        public string Version { get; }        
+        
         private static readonly string[] env = { "Init", "MainMenu", "GameCore", "Credits" };
 
         public static GameObject _controller;
@@ -65,11 +62,16 @@ namespace ParticleOverdrive
         public static bool NoteCoreParticles;
 
         [Init]
-        public void Init(IPA.Logging.Logger logger)
+        public Plugin(Zenjector zenjector, PluginMetadata metadata, IPALogger logger)
         {
             Config.Init();
-            log = logger;
+
+            Name = metadata.Name;
+            Version = metadata.HVersion.ToString();
             Logger.logger = logger;
+
+            zenjector.UseLogger(logger);
+            zenjector.Install<MenuInstaller>(Location.Menu);
         }
 
         public void LoadConfig()
@@ -104,8 +106,8 @@ namespace ParticleOverdrive
             }
             catch (Exception ex)
             {
-                log.Error($"Error creating private field accessors for camera noise and/or world particles, , these features will be disabled: {ex.Message}");
-                log.Debug(ex);
+                Logger.Log($"Error creating private field accessors for camera noise and/or world particles, , these features will be disabled: {ex.Message}", Logger.LogLevel.Error);
+                Logger.Log(ex.ToString(), Logger.LogLevel.Debug);
                 CameraNoiseWorldParticlesEnabled = false;
             }
             try
@@ -127,23 +129,22 @@ namespace ParticleOverdrive
                     SlashExplosionParticlesEnabled = false;
                     if (e.InnerException is ArgumentException argEx)
                     {
-                        log.Error($"Error applying Harmony patches. {argEx.Message}.");//: {argEx.ParamName}");
+                        Logger.Log($"Error applying Harmony patches. {argEx.Message}.", Logger.LogLevel.Error);//: {argEx.ParamName}");
                     }
                     else
-                        log.Error($"Error applying Harmony patches: {e.Message}");
-                    log.Debug(e);
+                        Logger.Log($"Error applying Harmony patches: {e.Message}", Logger.LogLevel.Error);
+                    Logger.Log(e.ToString(), Logger.LogLevel.Debug);
                 }
 
             }
             catch(Exception ex)
             {
-                log.Error($"Error creating private field accessors for Slash/Explosion particles, these features will be disabled: {ex.Message}");
-                log.Debug(ex);
+                Logger.Log($"Error creating private field accessors for Slash/Explosion particles, these features will be disabled: {ex.Message}", Logger.LogLevel.Error);
+                Logger.Log(ex.ToString(), Logger.LogLevel.Debug);
                 SlashExplosionParticlesEnabled = false;
             }
 
             AddEvents();
-            BSMLSettings.Instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", new UI.POUI());
         }
 
         [OnExit]
