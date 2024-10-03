@@ -143,7 +143,7 @@ namespace ParticleOverdrive
             }
 
             AddEvents();
-            BSMLSettings.instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", new UI.POUI());
+            BSMLSettings.Instance.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", new UI.POUI());
         }
 
         [OnExit]
