@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file contains project properties used by the build. -->
+<Project>
+
+    <!-- Plugin Metadata -->
+    <PropertyGroup>
+        <PluginId>ParticleOverdrive</PluginId>
+        <PluginName>ParticleOverdrive</PluginName>
+        <Authors>qqrz997</Authors>
+        <Version>1.13.1</Version>
+        <GameVersion>1.37.4</GameVersion>
+        <Description>A mod for adjusting particle settings in Beat Saber</Description>
+        <ProjectSource>https://github.com/qqrz997/BeatSaber-ParticleOverdrive</ProjectSource>
+    </PropertyGroup>
+
+    <!-- Plugin Dependencies -->
+    <ItemGroup>
+        <DependsOn Include="BSIPA" Version="^4.3.0"/>
+        <DependsOn Include="BeatSaberMarkupLanguage" Version="^1.12.0"/>
+        <DependsOn Include="BS Utils" Version="^1.14.0"/>
+        <DependsOn Include="SiraUtil" Version="^3.1.12"/>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <BSMTProjectType>BSIPA</BSMTProjectType>
+        <GenerateManifest>true</GenerateManifest>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)' != 'Release'">
+        <DisableZipRelease>true</DisableZipRelease>
+    </PropertyGroup>
+
+</Project>
