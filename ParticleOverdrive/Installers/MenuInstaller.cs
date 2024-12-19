@@ -2,14 +2,13 @@
 using ParticleOverdrive.UI;
 using Zenject;
 
-namespace ParticleOverdrive.Installers
+namespace ParticleOverdrive.Installers;
+
+internal class MenuInstaller : Installer
 {
-    internal class MenuInstaller : Installer
+    public override void InstallBindings()
     {
-        public override void InstallBindings()
-        {
-            Container.Bind<POUI>().AsSingle();
-            Container.BindInterfacesTo<SettingsMenuManager>().AsSingle();
-        }
+        Container.Bind<POUI>().AsSingle();
+        Container.BindInterfacesTo<SettingsMenuManager>().AsSingle();
     }
 }

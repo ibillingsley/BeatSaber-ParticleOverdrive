@@ -1,14 +1,13 @@
 ﻿using ParticleOverdrive.Controllers;
 using Zenject;
 
-namespace ParticleOverdrive.Installers
+namespace ParticleOverdrive.Installers;
+
+internal class WorldParticlesInstaller : Installer
 {
-    internal class WorldParticlesInstaller : Installer
+    public override void InstallBindings()
     {
-        public override void InstallBindings()
-        {
-            Container.BindInterfacesAndSelfTo<CameraNoiseController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<DustParticleController>().AsSingle();
-        }
+        Container.BindInterfacesAndSelfTo<CameraNoiseController>().AsSingle();
+        Container.BindInterfacesAndSelfTo<DustParticleController>().AsSingle();
     }
 }
