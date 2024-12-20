@@ -4,38 +4,36 @@ using Zenject;
 
 namespace ParticleOverdrive.Controllers;
 
-public class CameraNoiseController : IInitializable
+internal class CameraNoiseController : IInitializable
 {
-    private readonly ParticleConfig _config;
-    private readonly Texture2D _blankNoiseTexture;
+    private readonly ParticleConfig config;
+    private readonly Texture2D blankNoiseTexture;
 
     private CameraNoiseController(ParticleConfig config)
     {
-        _config = config;
-        _blankNoiseTexture = Texture2D.blackTexture;
-        Color32 black = new(0, 0, 0, 255);
-        Color32[] pixels = _blankNoiseTexture.GetPixels32();
-        for (int i = 0; i < pixels.Length; i++)
-            pixels[i] = black;
-        _blankNoiseTexture.SetPixels32(pixels);
-        _blankNoiseTexture.Apply();
+        this.config = config;
+        blankNoiseTexture = Texture2D.blackTexture;
+        var pixelColors = blankNoiseTexture.GetPixels32();
+        for (int i = 0; i < pixelColors.Length; i++) pixelColors[i] = Color.black;
+        blankNoiseTexture.SetPixels32(pixelColors);
+        blankNoiseTexture.Apply();
     }
 
-    private BlueNoiseDitheringUpdater _ditheringUpdater;
-    private Texture2D _originalNoiseTexture;
+    private BlueNoiseDitheringUpdater? ditheringUpdater;
+    private Texture2D? originalNoiseTexture;
 
     public void Initialize()
     {
-        _ditheringUpdater = GameObject.Find("BlueNoiseHelper").GetComponent<BlueNoiseDitheringUpdater>();
-        SetCameraNoiseActive(_config.CameraGrain);
+        ditheringUpdater = GameObject.Find("BlueNoiseHelper").GetComponent<BlueNoiseDitheringUpdater>();
+        SetCameraNoiseActive(config.CameraGrain);
     }
 
     public void SetCameraNoiseActive(bool active)
     {
-        if (_ditheringUpdater != null)
+        if (ditheringUpdater != null)
         {
-            _originalNoiseTexture ??= _ditheringUpdater._blueNoiseDithering._noiseTexture;
-            _ditheringUpdater._blueNoiseDithering._noiseTexture = active ? _originalNoiseTexture : _blankNoiseTexture;
+            originalNoiseTexture ??= ditheringUpdater._blueNoiseDithering._noiseTexture;
+            ditheringUpdater._blueNoiseDithering._noiseTexture = active ? originalNoiseTexture : blankNoiseTexture;
         }
     }
 }

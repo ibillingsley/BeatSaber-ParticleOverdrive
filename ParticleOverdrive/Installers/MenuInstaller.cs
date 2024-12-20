@@ -8,7 +8,7 @@ internal class MenuInstaller : Installer
 {
     public override void InstallBindings()
     {
-        Container.Bind<POUI>().AsSingle();
+        Container.Bind<SettingsMenu>().AsSingle();
         Container.BindInterfacesTo<SettingsMenuManager>().AsSingle();
     }
 }

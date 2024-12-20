@@ -6,43 +6,38 @@ using Zenject;
 
 namespace ParticleOverdrive.Controllers;
 
-public class DustParticleController : IInitializable
+internal class DustParticleController : IInitializable
 {
-    [Inject] private readonly ParticleConfig _config;
-    [Inject] private readonly ICoroutineStarter _coroutineStarter;
+    private readonly ParticleConfig config;
+    private readonly ICoroutineStarter coroutineStarter;
+    private readonly string dustParticlesName;
+    
+    private DustParticleController(ParticleConfig config, ICoroutineStarter coroutineStarter, [InjectOptional] EnvironmentSceneSetupData? environmentData)
+    {
+        this.config = config;
+        this.coroutineStarter = coroutineStarter;
+        dustParticlesName = environmentData == null ? "DustPS" : environmentData.environmentInfo.serializedName switch
+        {
+            "BritneyEnvironment" => "DustBritney",
+            _ => "DustPS"
+        };
+    }
 
-    [InjectOptional] private readonly EnvironmentSceneSetupData _environmentData;
-
-    private ParticleSystem _dustPS = null;
-    private string _dustParticlesName;
+    private ParticleSystem? dustPS;
 
     public void Initialize()
     {
-        _dustParticlesName = _environmentData switch
-        {
-            null => "DustPS",
-            _ => _environmentData.environmentInfo.serializedName switch
-            {
-                "BritneyEnvironment" => "DustBritney",
-                _ => "DustPS"
-            }
-        };
-
         // only has to be done in a coroutine because of MultiPlayer being like a frame too early...
-        _coroutineStarter.StartCoroutine(InitializeCoroutine());
+        coroutineStarter.StartCoroutine(InitializeCoroutine());
     }
 
     private IEnumerator InitializeCoroutine()
     {
-        yield return new WaitUntil(() => FindDustParticleSystem() != null);
-        SetDustParticlesActive(_config.DustParticles);
-    }
-
-    private ParticleSystem FindDustParticleSystem() =>
-        _dustPS = Object.FindObjectsOfType<ParticleSystem>().FirstOrDefault(p => p.name == _dustParticlesName);
-
-    private void SetDustParticlesActive(bool active)
-    {
-        if (_dustPS) _dustPS.gameObject.SetActive(active);
+        yield return new WaitUntil(() =>
+        {
+            dustPS = Object.FindObjectsOfType<ParticleSystem>().FirstOrDefault(p => p.name == dustParticlesName);
+            return dustPS != null;
+        });
+        if (dustPS != null) dustPS.gameObject.SetActive(config.DustParticles);
     }
 }

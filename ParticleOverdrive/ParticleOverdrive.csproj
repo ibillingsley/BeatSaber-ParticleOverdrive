@@ -7,8 +7,8 @@
     <!-- Some features of the latest version of C# aren't available in Beat Saber. Refer to the unity docs for info -->
     <!-- https://docs.unity3d.com/2022.3/Documentation/Manual/CSharpCompiler.html -->
     <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnableFrameworkPathOverride>true</EnableFrameworkPathOverride>
     <FrameworkPathOverride>$(BeatSaberDir)\Beat Saber_Data\Managed</FrameworkPathOverride>
     <MarkPackageReferencesAsExternallyResolved>false</MarkPackageReferencesAsExternallyResolved>

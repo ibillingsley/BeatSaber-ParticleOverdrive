@@ -1,45 +1,40 @@
 ﻿using ParticleOverdrive.Misc;
 using SiraUtil.Affinity;
-using SiraUtil.Logging;
 using UnityEngine;
 
 namespace ParticleOverdrive.Patches;
 
 internal class NoteCutParticlesEffectPatch : IAffinity
 {
-    private readonly SiraLog _log;
-    private readonly ParticleConfig _config;
+    private readonly ParticleConfig config;
 
-    private NoteCutParticlesEffectPatch(SiraLog log, ParticleConfig config)
+    private NoteCutParticlesEffectPatch(ParticleConfig config)
     {
-        _log = log;
-        _config = config;
+        this.config = config;
     }
 
-    private NoteCutCoreEffectsSpawner _effectsSpawner;
-
     [AffinityPatch(typeof(NoteCutCoreEffectsSpawner), nameof(NoteCutCoreEffectsSpawner.Start))]
-    public void Initialize(NoteCutCoreEffectsSpawner __instance)
+    public void Initialize(NoteCutCoreEffectsSpawner instance)
     {
-        ParticleSystem.MainModule slashMain = __instance._noteCutParticlesEffect._sparklesPSMainModule;
+        var slashMainModule = instance._noteCutParticlesEffect._sparklesPSMainModule;
         // default start size multiplier is 0.015
         //_log.Debug("slash startSizeMultiplier is: " + slashMain.startSizeMultiplier);
-        slashMain.maxParticles = int.MaxValue;
-        slashMain.startSizeMultiplier = _config.SlashParticleSizeMultiplier * 0.015f;
+        slashMainModule.maxParticles = int.MaxValue;
+        slashMainModule.startSizeMultiplier = config.SlashParticleSizeMultiplier * 0.015f;
 
-        ParticleSystem.MainModule explosionMain = __instance._noteCutParticlesEffect._explosionPS.main;
+        var explosionMainModule = instance._noteCutParticlesEffect._explosionPS.main;
         // default start lifetime multiplier is 0.6
         //_log.Debug("explosion startLifetimeMultiplier is: " + explosionMain.startLifetimeMultiplier);
         // default start size multiplier is 0.015
         //_log.Debug("explosion startSizeMultiplier is: " + explosionMain.startSizeMultiplier);
-        explosionMain.maxParticles = int.MaxValue;
-        explosionMain.startLifetimeMultiplier = _config.ExplosionParticleLifetimeMultiplier * 0.6f;
-        explosionMain.startSizeMultiplier = _config.ExplosionParticleSizeMultiplier * 0.015f;
+        explosionMainModule.maxParticles = int.MaxValue;
+        explosionMainModule.startLifetimeMultiplier = config.ExplosionParticleLifetimeMultiplier * 0.6f;
+        explosionMainModule.startSizeMultiplier = config.ExplosionParticleSizeMultiplier * 0.015f;
             
-        ParticleSystem.MainModule coreMain = __instance._noteCutParticlesEffect._explosionCorePSMainModule;
-        if (!_config.NoteCoreParticles)
+        var coreMainModule = instance._noteCutParticlesEffect._explosionCorePSMainModule;
+        if (!config.NoteCoreParticles)
         {
-            coreMain.startLifetimeMultiplier = 0f;
+            coreMainModule.startLifetimeMultiplier = 0f;
         }
     }
 
@@ -47,15 +42,13 @@ internal class NoteCutParticlesEffectPatch : IAffinity
     [AffinityPatch(typeof(NoteCutParticlesEffect), nameof(NoteCutParticlesEffect.SpawnParticles))]
     public void SpawnParticlesPrefix(ref Color32 color, ref int sparkleParticlesCount, ref int explosionParticlesCount, ref float lifetimeMultiplier)
     {
-        sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * _config.SlashParticleMultiplier);
-        explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * _config.ExplosionParticleMultiplier);
-        lifetimeMultiplier *= _config.SlashParticleLifetimeMultiplier;
+        sparkleParticlesCount = Mathf.FloorToInt(sparkleParticlesCount * config.SlashParticleMultiplier);
+        explosionParticlesCount = Mathf.FloorToInt(explosionParticlesCount * config.ExplosionParticleMultiplier);
+        lifetimeMultiplier *= config.SlashParticleLifetimeMultiplier;
 
-        if (_config.RainbowParticles)
+        if (config.RainbowParticles)
         {
-            Color generatedColor = Color.HSVToRGB(Random.value, 1f, 1f);
-            generatedColor.a = 0.5f;
-            color = generatedColor;
+            color = Color.HSVToRGB(Random.value, 1f, 1f) with { a = 0.5f };
         }
     }
 }

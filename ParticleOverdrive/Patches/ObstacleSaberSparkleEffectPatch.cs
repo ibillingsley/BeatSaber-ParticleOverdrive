@@ -4,27 +4,26 @@ using UnityEngine;
 
 namespace ParticleOverdrive.Patches;
 
-class ObstacleSaberSparkleEffectPatch : IAffinity
+internal class ObstacleSaberSparkleEffectPatch : IAffinity
 {
-    private readonly ParticleConfig _config;
+    private readonly ParticleConfig config;
 
     private ObstacleSaberSparkleEffectPatch(ParticleConfig config)
     {
-        _config = config;
+        this.config = config;
     }
 
-    [AffinityPatch(typeof(ObstacleSaberSparkleEffect), "Awake")]
-    public void Postfix(ObstacleSaberSparkleEffect __instance)
+    [AffinityPatch(typeof(ObstacleSaberSparkleEffect), nameof(ObstacleSaberSparkleEffect.Awake))]
+    public void Postfix(ObstacleSaberSparkleEffect instance)
     {
-        ParticleSystem sparklePS = __instance._sparkleParticleSystem;
+        var sparkleParticles = instance._sparkleParticleSystem;
+        var sparkleEmission = sparkleParticles.emission;
+        var sparkleMainModule = sparkleParticles.main;
 
-        ParticleSystem.EmissionModule sparkleEM = sparklePS.emission;
-        ParticleSystem.MainModule sparkleMM = sparklePS.main;
-
-        sparkleEM.rateOverDistanceMultiplier *= _config.ObstacleParticleMultiplier;
-        sparkleEM.rateOverTimeMultiplier *= _config.ObstacleParticleMultiplier;
-        sparkleMM.maxParticles = int.MaxValue;
-        sparkleMM.startLifetimeMultiplier *= _config.ObstacleParticleLifetimeMultiplier;
-        sparkleMM.startSizeMultiplier *= _config.ObstacleParticleSizeMultiplier;
+        sparkleEmission.rateOverDistanceMultiplier *= config.ObstacleParticleMultiplier;
+        sparkleEmission.rateOverTimeMultiplier *= config.ObstacleParticleMultiplier;
+        sparkleMainModule.maxParticles = int.MaxValue;
+        sparkleMainModule.startLifetimeMultiplier *= config.ObstacleParticleLifetimeMultiplier;
+        sparkleMainModule.startSizeMultiplier *= config.ObstacleParticleSizeMultiplier;
     }
 }

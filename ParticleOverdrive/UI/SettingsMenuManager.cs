@@ -8,30 +8,30 @@ namespace ParticleOverdrive.UI;
 
 internal class SettingsMenuManager : IInitializable, IDisposable, IAffinity
 {
-    private readonly POUI _settingsMenu;
-    private readonly BSMLSettings _bsmlSettings;
-    private readonly ParticleConfig _config;
+    private readonly SettingsMenu settingsMenu;
+    private readonly BSMLSettings bsmlSettings;
+    private readonly ParticleConfig config;
 
-    private SettingsMenuManager(POUI poui, BSMLSettings bsmlSettings, ParticleConfig config)
+    private SettingsMenuManager(SettingsMenu settingsMenu, BSMLSettings bsmlSettings, ParticleConfig config)
     {
-        _settingsMenu = poui;
-        _bsmlSettings = bsmlSettings;
-        _config = config;
+        this.settingsMenu = settingsMenu;
+        this.bsmlSettings = bsmlSettings;
+        this.config = config;
     }
 
     public void Initialize()
     {
-        _bsmlSettings.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.POUI.bsml", _settingsMenu);
+        bsmlSettings.AddSettingsMenu("Particle Overdrive", "ParticleOverdrive.UI.SettingsMenu.bsml", settingsMenu);
     }
 
     [AffinityPatch(typeof(ModSettingsFlowCoordinator), nameof(ModSettingsFlowCoordinator.Ok))]
     public void OkPressedButThisPatchIsOnlyTemporaryBecauseThisIsCurrentlyTheMostElegantWayToGetThisButtonEvent_uwu()
     {
-        _config.SaveConfig();
+        config.SaveConfig();
     }
 
     public void Dispose()
     {
-        _bsmlSettings.RemoveSettingsMenu(_settingsMenu);
+        bsmlSettings.RemoveSettingsMenu(settingsMenu);
     }
 }

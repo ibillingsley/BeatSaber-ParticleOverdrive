@@ -7,35 +7,35 @@ namespace ParticleOverdrive.Patches;
 
 public class SaberClashEffectPatch : IAffinity
 {
-    private readonly ParticleConfig _config;
+    private readonly ParticleConfig config;
 
     private SaberClashEffectPatch(ParticleConfig config)
     {
-        _config = config;
+        this.config = config;
     }
 
     [AffinityPatch(typeof(SaberClashEffect), nameof(SaberClashEffect.Start))]
-    public void Postfix(ref SaberClashEffect __instance)
+    public void Postfix(ref SaberClashEffect instance)
     {
-        ParticleSystem.EmissionModule glowEM = __instance._glowParticleSystem.emission;
-        ParticleSystem.EmissionModule sparkleEM = __instance._sparkleParticleSystem.emission;
+        var glowEmissionModule = instance._glowParticleSystem.emission;
+        var sparkleEmissionModule = instance._sparkleParticleSystem.emission;
 
-        ParticleSystem.MainModule glowMain = __instance._glowParticleSystem.main;
-        ParticleSystem.MainModule sparkleMain = __instance._sparkleParticleSystem.main;
+        var glowMainModule = instance._glowParticleSystem.main;
+        var sparkleMainModule = instance._sparkleParticleSystem.main;
 
-        if (!_config.ClashGlow)
+        if (!config.ClashGlow)
         {
-            glowMain.startLifetimeMultiplier = 0;
+            glowMainModule.startLifetimeMultiplier = 0;
         }
 
-        sparkleEM.rateOverDistanceMultiplier *= _config.ClashParticleMultiplier;
-        sparkleEM.rateOverTimeMultiplier *= _config.ClashParticleMultiplier;
+        sparkleEmissionModule.rateOverDistanceMultiplier *= config.ClashParticleMultiplier;
+        sparkleEmissionModule.rateOverTimeMultiplier *= config.ClashParticleMultiplier;
 
-        glowEM.rateOverDistanceMultiplier *= _config.ClashParticleMultiplier;
-        glowEM.rateOverTimeMultiplier *= _config.ClashParticleMultiplier;
+        glowEmissionModule.rateOverDistanceMultiplier *= config.ClashParticleMultiplier;
+        glowEmissionModule.rateOverTimeMultiplier *= config.ClashParticleMultiplier;
 
-        sparkleMain.maxParticles = int.MaxValue;
-        sparkleMain.startLifetimeMultiplier *= _config.ClashParticleLifetimeMultiplier;
-        sparkleMain.startSizeMultiplier *= _config.ClashParticleSizeMultiplier;
+        sparkleMainModule.maxParticles = int.MaxValue;
+        sparkleMainModule.startLifetimeMultiplier *= config.ClashParticleLifetimeMultiplier;
+        sparkleMainModule.startSizeMultiplier *= config.ClashParticleSizeMultiplier;
     }
 }
