@@ -1,4 +1,4 @@
-﻿using ParticleOverdrive.Misc;
+using ParticleOverdrive.Misc;
 using SiraUtil.Affinity;
 using UnityEngine;
 
@@ -14,15 +14,15 @@ internal class NoteCutParticlesEffectPatch : IAffinity
     }
 
     [AffinityPatch(typeof(NoteCutCoreEffectsSpawner), nameof(NoteCutCoreEffectsSpawner.Start))]
-    public void Initialize(NoteCutCoreEffectsSpawner instance)
+    public void Initialize(NoteCutCoreEffectsSpawner __instance)
     {
-        var slashMainModule = instance._noteCutParticlesEffect._sparklesPSMainModule;
+        var slashMainModule = __instance._noteCutParticlesEffect._sparklesPSMainModule;
         // default start size multiplier is 0.015
         //_log.Debug("slash startSizeMultiplier is: " + slashMain.startSizeMultiplier);
         slashMainModule.maxParticles = int.MaxValue;
         slashMainModule.startSizeMultiplier = config.SlashParticleSizeMultiplier * 0.015f;
 
-        var explosionMainModule = instance._noteCutParticlesEffect._explosionPS.main;
+        var explosionMainModule = __instance._noteCutParticlesEffect._explosionPS.main;
         // default start lifetime multiplier is 0.6
         //_log.Debug("explosion startLifetimeMultiplier is: " + explosionMain.startLifetimeMultiplier);
         // default start size multiplier is 0.015
@@ -31,7 +31,7 @@ internal class NoteCutParticlesEffectPatch : IAffinity
         explosionMainModule.startLifetimeMultiplier = config.ExplosionParticleLifetimeMultiplier * 0.6f;
         explosionMainModule.startSizeMultiplier = config.ExplosionParticleSizeMultiplier * 0.015f;
             
-        var coreMainModule = instance._noteCutParticlesEffect._explosionCorePSMainModule;
+        var coreMainModule = __instance._noteCutParticlesEffect._explosionCorePSMainModule;
         if (!config.NoteCoreParticles)
         {
             coreMainModule.startLifetimeMultiplier = 0f;

@@ -15,13 +15,13 @@ public class SaberClashEffectPatch : IAffinity
     }
 
     [AffinityPatch(typeof(SaberClashEffect), nameof(SaberClashEffect.Start))]
-    public void Postfix(ref SaberClashEffect instance)
+    public void Postfix(ref SaberClashEffect __instance)
     {
-        var glowEmissionModule = instance._glowParticleSystem.emission;
-        var sparkleEmissionModule = instance._sparkleParticleSystem.emission;
+        var glowEmissionModule = __instance._glowParticleSystem.emission;
+        var sparkleEmissionModule = __instance._sparkleParticleSystem.emission;
 
-        var glowMainModule = instance._glowParticleSystem.main;
-        var sparkleMainModule = instance._sparkleParticleSystem.main;
+        var glowMainModule = __instance._glowParticleSystem.main;
+        var sparkleMainModule = __instance._sparkleParticleSystem.main;
 
         if (!config.ClashGlow)
         {

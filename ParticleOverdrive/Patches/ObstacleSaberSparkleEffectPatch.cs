@@ -14,9 +14,9 @@ internal class ObstacleSaberSparkleEffectPatch : IAffinity
     }
 
     [AffinityPatch(typeof(ObstacleSaberSparkleEffect), nameof(ObstacleSaberSparkleEffect.Awake))]
-    public void Postfix(ObstacleSaberSparkleEffect instance)
+    public void Postfix(ObstacleSaberSparkleEffect __instance)
     {
-        var sparkleParticles = instance._sparkleParticleSystem;
+        var sparkleParticles = __instance._sparkleParticleSystem;
         var sparkleEmission = sparkleParticles.emission;
         var sparkleMainModule = sparkleParticles.main;
 
