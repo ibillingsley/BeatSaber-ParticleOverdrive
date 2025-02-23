@@ -87,6 +87,13 @@ public class SettingsMenu
         set => config.ExplosionParticleSizeMultiplier = value;
     }
 
+    [UIValue("explosionParticleSpeedChoice")]
+    public float ExplosionParticleSpeedMultiplier
+    {
+        get => config.ExplosionParticleSpeedMultiplier;
+        set => config.ExplosionParticleSpeedMultiplier = value;
+    }
+
     [UIValue("rainbowParticlesEnable")]
     public bool RainbowParticles
     {

@@ -1,4 +1,4 @@
-﻿using BS_Utils.Utilities;
+using BS_Utils.Utilities;
 using Zenject;
 
 namespace ParticleOverdrive.Misc;
@@ -24,6 +24,7 @@ internal class ParticleConfig : IInitializable
     public float ExplosionParticleMultiplier { get; set; }
     public float ExplosionParticleLifetimeMultiplier { get; set; }
     public float ExplosionParticleSizeMultiplier { get; set; }
+    public float ExplosionParticleSpeedMultiplier { get; set; }
     public bool RainbowParticles { get; set; }
     public bool NoteCoreParticles { get; set; }
 
@@ -51,6 +52,7 @@ internal class ParticleConfig : IInitializable
         config.SetFloat(SectionParticles, nameof(ExplosionParticleMultiplier), ExplosionParticleMultiplier);
         config.SetFloat(SectionParticles, nameof(ExplosionParticleLifetimeMultiplier), ExplosionParticleLifetimeMultiplier);
         config.SetFloat(SectionParticles, nameof(ExplosionParticleSizeMultiplier), ExplosionParticleSizeMultiplier);
+        config.SetFloat(SectionParticles, nameof(ExplosionParticleSpeedMultiplier), ExplosionParticleSpeedMultiplier);
         config.SetBool(SectionParticles, nameof(RainbowParticles), RainbowParticles);
         config.SetBool(SectionParticles, nameof(NoteCoreParticles), NoteCoreParticles);
         config.SetFloat(SectionParticles, nameof(ClashParticleMultiplier), ClashParticleMultiplier);
@@ -72,6 +74,7 @@ internal class ParticleConfig : IInitializable
         ExplosionParticleMultiplier = config.GetFloat(SectionParticles, nameof(ExplosionParticleMultiplier), 1.0f, true);
         ExplosionParticleLifetimeMultiplier = config.GetFloat(SectionParticles, nameof(ExplosionParticleLifetimeMultiplier), 1.0f, true);
         ExplosionParticleSizeMultiplier = config.GetFloat(SectionParticles, nameof(ExplosionParticleSizeMultiplier), 1.0f, true);
+        ExplosionParticleSpeedMultiplier = config.GetFloat(SectionParticles, nameof(ExplosionParticleSpeedMultiplier), 1.0f, true);
         RainbowParticles = config.GetBool(SectionParticles, nameof(RainbowParticles), false, true);
         NoteCoreParticles = config.GetBool(SectionParticles, nameof(NoteCoreParticles), true, true);
         ClashParticleMultiplier = config.GetFloat(SectionParticles, nameof(ClashParticleMultiplier), 1.0f, true);

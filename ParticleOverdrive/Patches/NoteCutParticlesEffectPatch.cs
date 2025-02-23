@@ -27,10 +27,13 @@ internal class NoteCutParticlesEffectPatch : IAffinity
         //_log.Debug("explosion startLifetimeMultiplier is: " + explosionMain.startLifetimeMultiplier);
         // default start size multiplier is 0.015
         //_log.Debug("explosion startSizeMultiplier is: " + explosionMain.startSizeMultiplier);
+        // default start speed multiplier is 10
+        //_log.Debug("explosion startSpeedMultiplier is: " + explosionMain.startSpeedMultiplier);
         explosionMainModule.maxParticles = int.MaxValue;
         explosionMainModule.startLifetimeMultiplier = config.ExplosionParticleLifetimeMultiplier * 0.6f;
         explosionMainModule.startSizeMultiplier = config.ExplosionParticleSizeMultiplier * 0.015f;
-            
+        explosionMainModule.startSpeedMultiplier = config.ExplosionParticleSpeedMultiplier * 10f;
+
         var coreMainModule = __instance._noteCutParticlesEffect._explosionCorePSMainModule;
         if (!config.NoteCoreParticles)
         {

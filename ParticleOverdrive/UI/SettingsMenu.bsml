@@ -24,6 +24,7 @@
       <list-setting text='Explosion Particles' value='explosionParticleChoice' choices='explosionParticleChoices' formatter='multiplierFormatter' apply-on-change='true'/>
       <list-setting text='Explosion Particle Lifetime' value='explosionParticleLifetimeChoice' choices='lifetimeChoices' formatter='multiplierFormatter' apply-on-change='true'/>
       <list-setting text='Explosion Particle Size' value='explosionParticleSizeChoice' choices='lifetimeChoices' formatter='multiplierFormatter' apply-on-change='true'/>
+      <list-setting text='Explosion Particle Speed' value='explosionParticleSpeedChoice' choices='lifetimeChoices' formatter='multiplierFormatter' apply-on-change='true'/>
       <bool-setting text='Core Particles' value='noteCoreParticlesEnable' apply-on-change='true'/>
       <bool-setting text='Rainbow Particles' value='rainbowParticlesEnable' apply-on-change='true'/>
     </settings-container>
